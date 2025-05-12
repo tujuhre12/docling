@@ -257,6 +257,9 @@ class BaseVlmOptions(BaseModel):
     kind: str
     prompt: str
 
+class BaseAsrOptions(BaseModel):
+    kind: str
+    prompt: str
 
 class ResponseFormat(str, Enum):
     DOCTAGS = "doctags"
@@ -268,6 +271,8 @@ class InferenceFramework(str, Enum):
     TRANSFORMERS = "transformers"
     OPENAI = "openai"
 
+    # Audio
+    ASR_NEMO = "asr_nemo"
 
 class HuggingFaceVlmOptions(BaseVlmOptions):
     kind: Literal["hf_model_options"] = "hf_model_options"
@@ -284,6 +289,20 @@ class HuggingFaceVlmOptions(BaseVlmOptions):
     def repo_cache_folder(self) -> str:
         return self.repo_id.replace("/", "--")
 
+class HuggingFaceAsrOptions(BaseVlmOptions):
+    kind: Literal["hf_model_options"] = "hf_model_options"
+
+    repo_id: str
+    load_in_8bit: bool = True
+    llm_int8_threshold: float = 6.0
+    quantized: bool = False
+
+    inference_framework: InferenceFramework
+    response_format: ResponseFormat
+
+    @property
+    def repo_cache_folder(self) -> str:
+        return self.repo_id.replace("/", "--")
 
 class ApiVlmOptions(BaseVlmOptions):
     kind: Literal["api_model_options"] = "api_model_options"
@@ -328,6 +347,13 @@ granite_vision_vlm_ollama_conversion_options = ApiVlmOptions(
     scale=1.0,
     timeout=120,
     response_format=ResponseFormat.MARKDOWN,
+)
+
+asr_nemo_conversion_options = HuggingFaceAsrOptions(
+    repo_id="nvidia/parakeet-tdt-0.6b-v2",
+    prompt="Convert this page to docling.",
+    response_format=ResponseFormat.MARKDOWN,
+    inference_framework=InferenceFramework.ASR_NEMO,
 )
 
 
@@ -389,7 +415,11 @@ class VlmPipelineOptions(PaginatedPipelineOptions):
         smoldocling_vlm_conversion_options
     )
 
-
+class AsrPipelineOptions(PaginatedPipelineOptions):
+    asr_options: Union[HuggingFaceAsrOptions] = (
+        asr_nemo_conversion_options
+    )
+    
 class PdfPipelineOptions(PaginatedPipelineOptions):
     """Options for the PDF pipeline."""
 
