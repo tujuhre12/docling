@@ -257,9 +257,11 @@ class BaseVlmOptions(BaseModel):
     kind: str
     prompt: str
 
+
 class BaseAsrOptions(BaseModel):
     kind: str
     prompt: str
+
 
 class ResponseFormat(str, Enum):
     DOCTAGS = "doctags"
@@ -273,6 +275,7 @@ class InferenceFramework(str, Enum):
 
     # Audio
     ASR_NEMO = "asr_nemo"
+
 
 class HuggingFaceVlmOptions(BaseVlmOptions):
     kind: Literal["hf_model_options"] = "hf_model_options"
@@ -289,6 +292,7 @@ class HuggingFaceVlmOptions(BaseVlmOptions):
     def repo_cache_folder(self) -> str:
         return self.repo_id.replace("/", "--")
 
+
 class HuggingFaceAsrOptions(BaseVlmOptions):
     kind: Literal["hf_model_options"] = "hf_model_options"
 
@@ -303,6 +307,7 @@ class HuggingFaceAsrOptions(BaseVlmOptions):
     @property
     def repo_cache_folder(self) -> str:
         return self.repo_id.replace("/", "--")
+
 
 class ApiVlmOptions(BaseVlmOptions):
     kind: Literal["api_model_options"] = "api_model_options"
@@ -415,11 +420,11 @@ class VlmPipelineOptions(PaginatedPipelineOptions):
         smoldocling_vlm_conversion_options
     )
 
+
 class AsrPipelineOptions(PaginatedPipelineOptions):
-    asr_options: Union[HuggingFaceAsrOptions] = (
-        asr_nemo_conversion_options
-    )
-    
+    asr_options: Union[HuggingFaceAsrOptions] = asr_nemo_conversion_options
+
+
 class PdfPipelineOptions(PaginatedPipelineOptions):
     """Options for the PDF pipeline."""
 

@@ -10,12 +10,12 @@ from docling.datamodel.pipeline_options import (
     AcceleratorOptions,
     HuggingFaceAsrOptions,
 )
-
 from docling.models.base_model import BasePageModel
 from docling.utils.accelerator_utils import decide_device
 from docling.utils.profiling import TimeRecorder
 
 _log = logging.getLogger(__name__)
+
 
 class AsrNemoModel(BasePageModel):
     def __init__(
@@ -26,7 +26,7 @@ class AsrNemoModel(BasePageModel):
         asr_options: HuggingFaceAsrOptions,
     ):
         self.enabled = enabled
-    
+
         self.asr_options = asr_options
 
         if self.enabled:
@@ -45,7 +45,6 @@ class AsrNemoModel(BasePageModel):
             elif (artifacts_path / repo_cache_folder).exists():
                 artifacts_path = artifacts_path / repo_cache_folder
 
-            self.model = nemo_asr.models.ASRModel.from_pretrained("nvidia/parakeet-tdt-0.6b-v2")
-
-            
-            
+            self.model = nemo_asr.models.ASRModel.from_pretrained(
+                "nvidia/parakeet-tdt-0.6b-v2"
+            )

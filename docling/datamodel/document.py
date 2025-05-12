@@ -279,7 +279,7 @@ class _DocumentConversionInput(BaseModel):
         if isinstance(obj, Path):
             mime = filetype.guess_mime(str(obj))
             print(mime)
-            
+
             if mime is None:
                 ext = obj.suffix[1:]
                 mime = _DocumentConversionInput._mime_from_extension(ext)
@@ -292,8 +292,8 @@ class _DocumentConversionInput(BaseModel):
                 elif obj.suffixes[-1].lower() == ".docx":
                     mime = "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
                 elif obj.suffixes[-1].lower() == ".pptx":
-                    mime = "application/vnd.openxmlformats-officedocument.presentationml.presentation"    
-                
+                    mime = "application/vnd.openxmlformats-officedocument.presentationml.presentation"
+
         elif isinstance(obj, DocumentStream):
             content = obj.stream.read(8192)
             obj.stream.seek(0)
@@ -313,11 +313,11 @@ class _DocumentConversionInput(BaseModel):
                     mime = "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
                 elif objname.endswith(".pptx"):
                     mime = "application/vnd.openxmlformats-officedocument.presentationml.presentation"
-                    
+
         mime = mime or _DocumentConversionInput._detect_html_xhtml(content)
         mime = mime or _DocumentConversionInput._detect_csv(content)
         mime = mime or "text/plain"
-        
+
         formats = MimeTypeToFormat.get(mime, [])
         if formats:
             if len(formats) == 1 and mime not in ("text/plain"):
@@ -367,7 +367,7 @@ class _DocumentConversionInput(BaseModel):
     @staticmethod
     def _mime_from_extension(ext):
         print("ext: ", ext)
-        
+
         mime = None
         if ext in FormatToExtensions[InputFormat.ASCIIDOC]:
             mime = FormatToMimeType[InputFormat.ASCIIDOC][0]
@@ -382,7 +382,7 @@ class _DocumentConversionInput(BaseModel):
         elif ext in FormatToExtensions[InputFormat.PDF]:
             mime = FormatToMimeType[InputFormat.PDF][0]
         elif ext in FormatToExtensions[InputFormat.WAV]:
-            mime = FormatToMimeType[InputFormat.WAV][0]            
+            mime = FormatToMimeType[InputFormat.WAV][0]
         return mime
 
     @staticmethod

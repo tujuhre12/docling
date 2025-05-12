@@ -34,7 +34,7 @@ class ConversionStatus(str, Enum):
 class InputFormat(str, Enum):
     """A document format supported by document backend parsers."""
 
-    # Documents    
+    # Documents
     DOCX = "docx"
     PPTX = "pptx"
     HTML = "html"
@@ -50,6 +50,7 @@ class InputFormat(str, Enum):
 
     # Audio
     WAV = "wav"
+
 
 class OutputFormat(str, Enum):
     MARKDOWN = "md"
@@ -105,8 +106,7 @@ FormatToMimeType: Dict[InputFormat, List[str]] = {
     ],
     InputFormat.XML_USPTO: ["application/xml", "text/plain"],
     InputFormat.JSON_DOCLING: ["application/json"],
-
-# Audio
+    # Audio
     InputFormat.WAV: ["audio/wav", "audio/x-wav"],
 }
 
@@ -165,8 +165,9 @@ class LayoutPrediction(BaseModel):
 class VlmPrediction(BaseModel):
     text: str = ""
 
+
 class AsrPrediction(BaseModel):
-    text: str = ""    
+    text: str = ""
 
 
 class ContainerElement(

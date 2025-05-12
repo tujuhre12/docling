@@ -19,9 +19,9 @@ from docling.backend.md_backend import MarkdownDocumentBackend
 from docling.backend.msexcel_backend import MsExcelDocumentBackend
 from docling.backend.mspowerpoint_backend import MsPowerpointDocumentBackend
 from docling.backend.msword_backend import MsWordDocumentBackend
+from docling.backend.wav_backend import WavDocumentBackend
 from docling.backend.xml.jats_backend import JatsDocumentBackend
 from docling.backend.xml.uspto_backend import PatentUsptoDocumentBackend
-from docling.backend.wav_backend import WavDocumentBackend
 from docling.datamodel.base_models import (
     ConversionStatus,
     DoclingComponentType,
@@ -34,7 +34,7 @@ from docling.datamodel.document import (
     InputDocument,
     _DocumentConversionInput,
 )
-from docling.datamodel.pipeline_options import PipelineOptions, AsrPipelineOptions
+from docling.datamodel.pipeline_options import AsrPipelineOptions, PipelineOptions
 from docling.datamodel.settings import (
     DEFAULT_PAGE_RANGE,
     DocumentLimits,
@@ -42,10 +42,10 @@ from docling.datamodel.settings import (
     settings,
 )
 from docling.exceptions import ConversionError
+from docling.pipeline.asr_pipeline import AsrPipeline
 from docling.pipeline.base_pipeline import BasePipeline
 from docling.pipeline.simple_pipeline import SimplePipeline
 from docling.pipeline.standard_pdf_pipeline import StandardPdfPipeline
-from docling.pipeline.asr_pipeline import AsrPipeline
 from docling.utils.utils import chunkify
 
 _log = logging.getLogger(__name__)
@@ -119,9 +119,11 @@ class PdfFormatOption(FormatOption):
     pipeline_cls: Type = StandardPdfPipeline
     backend: Type[AbstractDocumentBackend] = DoclingParseV4DocumentBackend
 
+
 class AsrFormatOption(FormatOption):
     pipeline_cls: Type = AsrPipeline
-    
+
+
 def _get_default_option(format: InputFormat) -> FormatOption:
     format_to_default_options = {
         InputFormat.CSV: FormatOption(
@@ -300,7 +302,7 @@ class DocumentConverter:
         fopt = self.format_to_options.get(doc_format)
 
         print(self.format_to_options)
-        
+
         if fopt is None or fopt.pipeline_options is None:
             _log.warning(f"fopt ({fopt}) or its options are None for {doc_format}")
             return None

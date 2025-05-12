@@ -9,18 +9,16 @@ from docling.backend.abstract_backend import (
 )
 from docling.datamodel.base_models import ConversionStatus
 from docling.datamodel.document import ConversionResult
-from docling.datamodel.pipeline_options import PipelineOptions
-from docling.pipeline.base_pipeline import BasePipeline
-from docling.utils.profiling import ProfilingScope, TimeRecorder
-
 from docling.datamodel.pipeline_options import (
+    AsrPipelineOptions,
     HuggingFaceAsrOptions,
     InferenceFramework,
+    PipelineOptions,
     ResponseFormat,
-    AsrPipelineOptions,
 )
-
 from docling.models.hf_asr_models.asr_nemo import AsrNemoModel
+from docling.pipeline.base_pipeline import BasePipeline
+from docling.utils.profiling import ProfilingScope, TimeRecorder
 
 _log = logging.getLogger(__name__)
 
@@ -44,7 +42,7 @@ class AsrPipeline(BasePipeline):
                 "When defined, it must point to a folder containing all models required by the pipeline."
             )
 
-        if isinstance(self.pipeline_options.asr_options, HuggingFaceAsrOptions):        
+        if isinstance(self.pipeline_options.asr_options, HuggingFaceAsrOptions):
             asr_options = cast(HuggingFaceAsrOptions, self.pipeline_options.asr_options)
             if asr_options.inference_framework == InferenceFramework.ASR_NENO:
                 self.build_pipe = [
@@ -59,10 +57,10 @@ class AsrPipeline(BasePipeline):
                 _log.error(f"{asr_options.inference_framework} is not supported")
 
         else:
-            _log.error(f"ASR is not supported")
+            _log.error("ASR is not supported")
 
     def _build_document(self, conv_res: ConversionResult) -> ConversionResult:
-        pass            
+        pass
 
     def _assemble_document(self, conv_res: ConversionResult) -> ConversionResult:
         return conv_res
@@ -79,4 +77,4 @@ class AsrPipeline(BasePipeline):
 
     @classmethod
     def is_backend_supported(cls, backend: AbstractDocumentBackend):
-        pass    
+        pass

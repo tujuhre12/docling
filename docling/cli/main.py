@@ -577,11 +577,10 @@ def convert(  # noqa: C901
             asr_format_option = AsrFormatOption(
                 pipeline_cls=AsrPipeline, pipeline_options=pipeline_options
             )
-            
+
         else:
-            
             _log.error(f"Did not find the correct pipeline: {pipeline}")
-            
+
         if artifacts_path is not None:
             pipeline_options.artifacts_path = artifacts_path
 
