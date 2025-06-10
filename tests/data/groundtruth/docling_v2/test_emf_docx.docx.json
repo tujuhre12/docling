@@ -30,13 +30,22 @@
         "$ref": "#/texts/2"
       },
       {
-        "$ref": "#/pictures/1"
-      },
-      {
         "$ref": "#/texts/3"
       },
       {
+        "$ref": "#/pictures/1"
+      },
+      {
+        "$ref": "#/texts/4"
+      },
+      {
+        "$ref": "#/texts/5"
+      },
+      {
         "$ref": "#/pictures/2"
+      },
+      {
+        "$ref": "#/texts/6"
       }
     ],
     "content_layer": "body",
@@ -90,6 +99,18 @@
       "content_layer": "body",
       "label": "paragraph",
       "prov": [],
+      "orig": "",
+      "text": ""
+    },
+    {
+      "self_ref": "#/texts/3",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "paragraph",
+      "prov": [],
       "orig": "Vector in emf:",
       "text": "Vector in emf:",
       "formatting": {
@@ -100,7 +121,19 @@
       }
     },
     {
-      "self_ref": "#/texts/3",
+      "self_ref": "#/texts/4",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "paragraph",
+      "prov": [],
+      "orig": "",
+      "text": ""
+    },
+    {
+      "self_ref": "#/texts/5",
       "parent": {
         "$ref": "#/body"
       },
@@ -116,6 +149,18 @@
         "underline": false,
         "strikethrough": false
       }
+    },
+    {
+      "self_ref": "#/texts/6",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "paragraph",
+      "prov": [],
+      "orig": "",
+      "text": ""
     }
   ],
   "pictures": [
