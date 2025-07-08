@@ -37,9 +37,6 @@ _log = logging.getLogger(__name__)
 
 
 class StandardPdfPipeline(PaginatedPipeline):
-    # _layout_model_path = LayoutModel._model_path
-    # _table_model_path = TableStructureModel._model_path
-
     def __init__(self, pipeline_options: PdfPipelineOptions):
         super().__init__(pipeline_options)
         self.pipeline_options: PdfPipelineOptions
