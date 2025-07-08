@@ -1225,7 +1225,7 @@
       "text": "Undo/Redo : Introduced in the 1980s, the ability to undo mistakes and redo actions made experimentation and error correction much easier.",
       "formatting": null,
       "hyperlink": null,
-      "enumerated": false,
+      "enumerated": true,
       "marker": "1."
     },
     {
@@ -1256,7 +1256,7 @@
       "text": "Spell Check and Grammar Check : By the 1990s, these became standard, allowing users to spot errors automatically.",
       "formatting": null,
       "hyperlink": null,
-      "enumerated": false,
+      "enumerated": true,
       "marker": "2."
     },
     {
@@ -1287,7 +1287,7 @@
       "text": "Templates : Pre-designed formats for documents, such as resumes, letters, and invoices, helped users save time.",
       "formatting": null,
       "hyperlink": null,
-      "enumerated": false,
+      "enumerated": true,
       "marker": "3."
     },
     {
@@ -1318,7 +1318,7 @@
       "text": "Track Changes : A game-changer for collaboration, this feature allowed multiple users to suggest edits while maintaining the original text.",
       "formatting": null,
       "hyperlink": null,
-      "enumerated": false,
+      "enumerated": true,
       "marker": "4."
     },
     {
@@ -1349,7 +1349,7 @@
       "text": "Real-Time Collaboration : Tools like Google Docs and Microsoft 365 enabled multiple users to edit the same document simultaneously, forever changing teamwork dynamics.",
       "formatting": null,
       "hyperlink": null,
-      "enumerated": false,
+      "enumerated": true,
       "marker": "5."
     },
     {
@@ -1591,7 +1591,7 @@
       "text": "Artificial Intelligence : Modern word processors are leveraging AI to suggest content improvements. Tools like Grammarly, ProWritingAid, and even native features in Word now analyze tone, conciseness, and clarity. Some AI systems can even generate entire paragraphs or rewrite sentences.",
       "formatting": null,
       "hyperlink": null,
-      "enumerated": false,
+      "enumerated": true,
       "marker": "1."
     },
     {
@@ -1622,7 +1622,7 @@
       "text": "Integration with Other Tools : Word processors are no longer standalone. They integrate with task managers, cloud storage, and project management platforms. For instance, Google Docs syncs with Google Drive, while Microsoft Word integrates seamlessly with OneDrive and Teams.",
       "formatting": null,
       "hyperlink": null,
-      "enumerated": false,
+      "enumerated": true,
       "marker": "2."
     },
     {
@@ -1653,7 +1653,7 @@
       "text": "Voice Typing : Speech-to-text capabilities have made word processing more accessible, particularly for those with disabilities. Tools like Dragon NaturallySpeaking and built-in options in Google Docs and Microsoft Word have made dictation mainstream.",
       "formatting": null,
       "hyperlink": null,
-      "enumerated": false,
+      "enumerated": true,
       "marker": "3."
     },
     {
@@ -1684,7 +1684,7 @@
       "text": "Multimedia Documents : Word processing has expanded beyond text. Modern tools allow users to embed images, videos, charts, and interactive elements, transforming simple documents into rich multimedia experiences.",
       "formatting": null,
       "hyperlink": null,
-      "enumerated": false,
+      "enumerated": true,
       "marker": "4."
     },
     {
@@ -1715,7 +1715,7 @@
       "text": "Cross-Platform Accessibility : Thanks to cloud computing, documents can now be accessed and edited across devices. Whether you're on a desktop, tablet, or smartphone, you can continue working seamlessly.",
       "formatting": null,
       "hyperlink": null,
-      "enumerated": false,
+      "enumerated": true,
       "marker": "5."
     },
     {

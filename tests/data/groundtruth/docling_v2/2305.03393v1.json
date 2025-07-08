@@ -7273,7 +7273,7 @@
       "text": "Left-looking cell rule : The left neighbour of an \"L\" cell must be either another \"L\" cell or a \"C\" cell.",
       "formatting": null,
       "hyperlink": null,
-      "enumerated": false,
+      "enumerated": true,
       "marker": "1."
     },
     {
@@ -7304,7 +7304,7 @@
       "text": "Up-looking cell rule : The upper neighbour of a \"U\" cell must be either another \"U\" cell or a \"C\" cell.",
       "formatting": null,
       "hyperlink": null,
-      "enumerated": false,
+      "enumerated": true,
       "marker": "2."
     },
     {
@@ -7396,7 +7396,7 @@
       "text": "First row rule : Only \"L\" cells and \"C\" cells are allowed in the first row.",
       "formatting": null,
       "hyperlink": null,
-      "enumerated": false,
+      "enumerated": true,
       "marker": "4."
     },
     {
@@ -7427,7 +7427,7 @@
       "text": "First column rule : Only \"U\" cells and \"C\" cells are allowed in the first column.",
       "formatting": null,
       "hyperlink": null,
-      "enumerated": false,
+      "enumerated": true,
       "marker": "5."
     },
     {
@@ -7458,7 +7458,7 @@
       "text": "Rectangular rule : The table representation is always rectangular - all rows must have an equal number of tokens, terminated with \"NL\" token.",
       "formatting": null,
       "hyperlink": null,
-      "enumerated": false,
+      "enumerated": true,
       "marker": "6."
     },
     {
@@ -13818,7 +13818,7 @@
       "text": "Auer, C., Dolfi, M., Carvalho, A., Ramis, C.B., Staar, P.W.J.: Delivering document conversion as a cloud service with high throughput and responsiveness. CoRR abs/2206.00785 (2022). https://doi.org/10.48550/arXiv.2206.00785 , https://doi.org/10.48550/arXiv.2206.00785",
       "formatting": null,
       "hyperlink": null,
-      "enumerated": false,
+      "enumerated": true,
       "marker": "1."
     },
     {
@@ -13849,7 +13849,7 @@
       "text": "Chen, B., Peng, D., Zhang, J., Ren, Y., Jin, L.: Complex table structure recognition in the wild using transformer and identity matrix-based augmentation. In: Porwal, U., Forn\u00e9s, A., Shafait, F. (eds.) Frontiers in Handwriting Recognition. pp. 545561. Springer International Publishing, Cham (2022)",
       "formatting": null,
       "hyperlink": null,
-      "enumerated": false,
+      "enumerated": true,
       "marker": "2."
     },
     {
@@ -13880,7 +13880,7 @@
       "text": "Chi, Z., Huang, H., Xu, H.D., Yu, H., Yin, W., Mao, X.L.: Complicated table structure recognition. arXiv preprint arXiv:1908.04729 (2019)",
       "formatting": null,
       "hyperlink": null,
-      "enumerated": false,
+      "enumerated": true,
       "marker": "3."
     },
     {
@@ -13911,7 +13911,7 @@
       "text": "Deng, Y., Rosenberg, D., Mann, G.: Challenges in end-to-end neural scientific table recognition. In: 2019 International Conference on Document Analysis and Recognition (ICDAR). pp. 894-901. IEEE (2019)",
       "formatting": null,
       "hyperlink": null,
-      "enumerated": false,
+      "enumerated": true,
       "marker": "4."
     },
     {
@@ -14000,7 +14000,7 @@
       "text": "Kayal, P., Anand, M., Desai, H., Singh, M.: Tables to latex: structure and content extraction from scientific tables. International Journal on Document Analysis and Recognition (IJDAR) pp. 1-10 (2022)",
       "formatting": null,
       "hyperlink": null,
-      "enumerated": false,
+      "enumerated": true,
       "marker": "5."
     },
     {
@@ -14031,7 +14031,7 @@
       "text": "Lee, E., Kwon, J., Yang, H., Park, J., Lee, S., Koo, H.I., Cho, N.I.: Table structure recognition based on grid shape graph. In: 2022 Asia-Pacific Signal and Information Processing Association Annual Summit and Conference (APSIPA ASC). pp. 18681873. IEEE (2022)",
       "formatting": null,
       "hyperlink": null,
-      "enumerated": false,
+      "enumerated": true,
       "marker": "6."
     },
     {
@@ -14062,7 +14062,7 @@
       "text": "Li, M., Cui, L., Huang, S., Wei, F., Zhou, M., Li, Z.: Tablebank: A benchmark dataset for table detection and recognition (2019)",
       "formatting": null,
       "hyperlink": null,
-      "enumerated": false,
+      "enumerated": true,
       "marker": "7."
     },
     {
@@ -14093,7 +14093,7 @@
       "text": "Livathinos, N., Berrospi, C., Lysak, M., Kuropiatnyk, V., Nassar, A., Carvalho, A., Dolfi, M., Auer, C., Dinkla, K., Staar, P.: Robust pdf document conversion using recurrent neural networks. Proceedings of the AAAI Conference on Artificial Intelligence 35 (17), 15137-15145 (May 2021), https://ojs.aaai.org/index.php/ AAAI/article/view/17777",
       "formatting": null,
       "hyperlink": null,
-      "enumerated": false,
+      "enumerated": true,
       "marker": "8."
     },
     {
@@ -14124,7 +14124,7 @@
       "text": "Nassar, A., Livathinos, N., Lysak, M., Staar, P.: Tableformer: Table structure understanding with transformers. In: Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR). pp. 4614-4623 (June 2022)",
       "formatting": null,
       "hyperlink": null,
-      "enumerated": false,
+      "enumerated": true,
       "marker": "9."
     },
     {
@@ -14155,7 +14155,7 @@
       "text": "Pfitzmann, B., Auer, C., Dolfi, M., Nassar, A.S., Staar, P.W.J.: Doclaynet: A large human-annotated dataset for document-layout segmentation. In: Zhang, A., Rangwala, H. (eds.) KDD '22: The 28th ACM SIGKDD Conference on Knowledge Discovery and Data Mining, Washington, DC, USA, August 14 - 18, 2022. pp. 3743-3751. ACM (2022). https://doi.org/10.1145/3534678.3539043 , https:// doi.org/10.1145/3534678.3539043",
       "formatting": null,
       "hyperlink": null,
-      "enumerated": false,
+      "enumerated": true,
       "marker": "10."
     },
     {
@@ -14186,7 +14186,7 @@
       "text": "Prasad, D., Gadpal, A., Kapadni, K., Visave, M., Sultanpure, K.: Cascadetabnet: An approach for end to end table detection and structure recognition from imagebased documents. In: Proceedings of the IEEE/CVF conference on computer vision and pattern recognition workshops. pp. 572-573 (2020)",
       "formatting": null,
       "hyperlink": null,
-      "enumerated": false,
+      "enumerated": true,
       "marker": "11."
     },
     {
@@ -14217,7 +14217,7 @@
       "text": "Schreiber, S., Agne, S., Wolf, I., Dengel, A., Ahmed, S.: Deepdesrt: Deep learning for detection and structure recognition of tables in document images. In: 2017 14th IAPR international conference on document analysis and recognition (ICDAR). vol. 1, pp. 1162-1167. IEEE (2017)",
       "formatting": null,
       "hyperlink": null,
-      "enumerated": false,
+      "enumerated": true,
       "marker": "12."
     },
     {
@@ -14248,7 +14248,7 @@
       "text": "Siddiqui, S.A., Fateh, I.A., Rizvi, S.T.R., Dengel, A., Ahmed, S.: Deeptabstr: Deep learning based table structure recognition. In: 2019 International Conference on Document Analysis and Recognition (ICDAR). pp. 1403-1409 (2019). https:// doi.org/10.1109/ICDAR.2019.00226",
       "formatting": null,
       "hyperlink": null,
-      "enumerated": false,
+      "enumerated": true,
       "marker": "13."
     },
     {
@@ -14279,7 +14279,7 @@
       "text": "Smock, B., Pesala, R., Abraham, R.: PubTables-1M: Towards comprehensive table extraction from unstructured documents. In: Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR). pp. 4634-4642 (June 2022)",
       "formatting": null,
       "hyperlink": null,
-      "enumerated": false,
+      "enumerated": true,
       "marker": "14."
     },
     {
@@ -14310,7 +14310,7 @@
       "text": "Staar, P.W.J., Dolfi, M., Auer, C., Bekas, C.: Corpus conversion service: A machine learning platform to ingest documents at scale. In: Proceedings of the 24th ACM SIGKDD International Conference on Knowledge Discovery & Data Mining. pp. 774-782. KDD '18, Association for Computing Machinery, New York, NY, USA (2018). https://doi.org/10.1145/3219819.3219834 , https://doi.org/10. 1145/3219819.3219834",
       "formatting": null,
       "hyperlink": null,
-      "enumerated": false,
+      "enumerated": true,
       "marker": "15."
     },
     {
@@ -14341,7 +14341,7 @@
       "text": "Wang, X.: Tabular Abstraction, Editing, and Formatting. Ph.D. thesis, CAN (1996), aAINN09397",
       "formatting": null,
       "hyperlink": null,
-      "enumerated": false,
+      "enumerated": true,
       "marker": "16."
     },
     {
@@ -14372,7 +14372,7 @@
       "text": "Xue, W., Li, Q., Tao, D.: Res2tim: Reconstruct syntactic structures from table images. In: 2019 International Conference on Document Analysis and Recognition (ICDAR). pp. 749-755. IEEE (2019)",
       "formatting": null,
       "hyperlink": null,
-      "enumerated": false,
+      "enumerated": true,
       "marker": "17."
     },
     {
@@ -14461,7 +14461,7 @@
       "text": "Xue, W., Yu, B., Wang, W., Tao, D., Li, Q.: Tgrnet: A table graph reconstruction network for table structure recognition. In: Proceedings of the IEEE/CVF International Conference on Computer Vision. pp. 1295-1304 (2021)",
       "formatting": null,
       "hyperlink": null,
-      "enumerated": false,
+      "enumerated": true,
       "marker": "18."
     },
     {
@@ -14492,7 +14492,7 @@
       "text": "Ye, J., Qi, X., He, Y., Chen, Y., Gu, D., Gao, P., Xiao, R.: Pingan-vcgroup's solution for icdar 2021 competition on scientific literature parsing task b: Table recognition to html (2021). https://doi.org/10.48550/ARXIV.2105.01848 , https://arxiv.org/abs/2105.01848",
       "formatting": null,
       "hyperlink": null,
-      "enumerated": false,
+      "enumerated": true,
       "marker": "19."
     },
     {
@@ -14523,7 +14523,7 @@
       "text": "Zhang, Z., Zhang, J., Du, J., Wang, F.: Split, embed and merge: An accurate table structure recognizer. Pattern Recognition 126 , 108565 (2022)",
       "formatting": null,
       "hyperlink": null,
-      "enumerated": false,
+      "enumerated": true,
       "marker": "20."
     },
     {
@@ -14554,7 +14554,7 @@
       "text": "Zheng, X., Burdick, D., Popa, L., Zhong, X., Wang, N.X.R.: Global table extractor (gte): A framework for joint table identification and cell structure recognition using visual context. In: 2021 IEEE Winter Conference on Applications of Computer Vision (WACV). pp. 697-706 (2021). https://doi.org/10.1109/WACV48630.2021. 00074",
       "formatting": null,
       "hyperlink": null,
-      "enumerated": false,
+      "enumerated": true,
       "marker": "21."
     },
     {
@@ -14585,7 +14585,7 @@
       "text": "Zhong, X., ShafieiBavani, E., Jimeno Yepes, A.: Image-based table recognition: Data, model, and evaluation. In: Vedaldi, A., Bischof, H., Brox, T., Frahm, J.M. (eds.) Computer Vision - ECCV 2020. pp. 564-580. Springer International Publishing, Cham (2020)",
       "formatting": null,
       "hyperlink": null,
-      "enumerated": false,
+      "enumerated": true,
       "marker": "22."
     },
     {
@@ -14616,7 +14616,7 @@
       "text": "Zhong, X., Tang, J., Yepes, A.J.: Publaynet: largest dataset ever for document layout analysis. In: 2019 International Conference on Document Analysis and Recognition (ICDAR). pp. 1015-1022. IEEE (2019)",
       "formatting": null,
       "hyperlink": null,
-      "enumerated": false,
+      "enumerated": true,
       "marker": "23."
     }
   ],

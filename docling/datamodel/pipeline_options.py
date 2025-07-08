@@ -15,6 +15,15 @@ from docling.datamodel import asr_model_specs
 
 # Import the following for backwards compatibility
 from docling.datamodel.accelerator_options import AcceleratorDevice, AcceleratorOptions
+from docling.datamodel.layout_model_specs import (
+    DOCLING_LAYOUT_EGRET_LARGE,
+    DOCLING_LAYOUT_EGRET_MEDIUM,
+    DOCLING_LAYOUT_EGRET_XLARGE,
+    DOCLING_LAYOUT_HERON,
+    DOCLING_LAYOUT_HERON_101,
+    DOCLING_LAYOUT_V2,
+    LayoutModelConfig,
+)
 from docling.datamodel.pipeline_options_asr_model import (
     InlineAsrOptions,
 )
@@ -305,6 +314,8 @@ class PdfPipelineOptions(PaginatedPipelineOptions):
     generate_parsed_pages: Literal[True] = (
         True  # Always True since parsed_page is now mandatory
     )
+
+    layout_model_config: LayoutModelConfig = DOCLING_LAYOUT_V2
 
 
 class ProcessingPipeline(str, Enum):
