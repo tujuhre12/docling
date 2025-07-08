@@ -87,3 +87,10 @@ class ApiVlmOptions(BaseVlmOptions):
     timeout: float = 60
     concurrency: int = 1
     response_format: ResponseFormat
+
+
+class TwoStageVlmOptions(BaseVlmOptions):
+    kind: Literal["inline_model_options"] = "inline_two_stage_model_options"
+
+    vlm_options: UnionInlineVlmOptions
+    layout_options: LayoutOptions

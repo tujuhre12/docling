@@ -269,6 +269,7 @@ class VlmPipelineOptions(PaginatedPipelineOptions):
 class LayoutOptions(BaseModel):
     """Options for layout processing."""
 
+    repo_id: str = "ds4sd/docling-layout-heron"
     create_orphan_clusters: bool = True  # Whether to create clusters for orphaned cells
 
 
