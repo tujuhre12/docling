@@ -6786,7 +6786,7 @@
       "text": "There are user profiles for MGR, JANE, JUDY, and TONY.",
       "formatting": null,
       "hyperlink": null,
-      "enumerated": false,
+      "enumerated": true,
       "marker": "1."
     },
     {
@@ -6817,7 +6817,7 @@
       "text": "The user profile JANE specifies a group profile of MGR.",
       "formatting": null,
       "hyperlink": null,
-      "enumerated": false,
+      "enumerated": true,
       "marker": "2."
     },
     {
@@ -6848,7 +6848,7 @@
       "text": "If a user is connected to the server using user profile JANE, all of the following function invocations return a value of 1:",
       "formatting": null,
       "hyperlink": null,
-      "enumerated": false,
+      "enumerated": true,
       "marker": "3."
     },
     {
@@ -7063,7 +7063,7 @@
       "text": "The other column to mask in this example is the TAX_ID information. In this example, the rules to enforce include the following ones:",
       "formatting": null,
       "hyperlink": null,
-      "enumerated": false,
+      "enumerated": true,
       "marker": "2."
     },
     {
@@ -7378,7 +7378,7 @@
       "text": "Figure 3-10 shows the masks that are created in the HR_SCHEMA.",
       "formatting": null,
       "hyperlink": null,
-      "enumerated": false,
+      "enumerated": true,
       "marker": "3."
     },
     {
@@ -7497,7 +7497,7 @@
       "text": "Run the SQL statements that are shown in Example 3-10.",
       "formatting": null,
       "hyperlink": null,
-      "enumerated": false,
+      "enumerated": true,
       "marker": "1."
     },
     {
@@ -7736,7 +7736,7 @@
       "text": "Look at the definition of the EMPLOYEE table, as shown in Figure 3-11. To do this, from the main navigation pane of System i Navigator, click Schemas \uf0ae HR_SCHEMA \uf0ae Tables , right-click the EMPLOYEES table, and click Definition .",
       "formatting": null,
       "hyperlink": null,
-      "enumerated": false,
+      "enumerated": true,
       "marker": "2."
     },
     {
@@ -7854,7 +7854,7 @@
       "text": "Figure 4-68 shows the Visual Explain of the same SQL statement, but with RCAC enabled. It is clear that the implementation of the SQL statement is more complex because the row permission rule becomes part of the WHERE clause.",
       "formatting": null,
       "hyperlink": null,
-      "enumerated": false,
+      "enumerated": true,
       "marker": "2."
     },
     {
@@ -7914,7 +7914,7 @@
       "text": "Compare the advised indexes that are provided by the Optimizer without RCAC and with RCAC enabled. Figure 4-69 shows the index advice for the SQL statement without RCAC enabled. The index being advised is for the ORDER BY clause.",
       "formatting": null,
       "hyperlink": null,
-      "enumerated": false,
+      "enumerated": true,
       "marker": "3."
     },
     {
