@@ -16,6 +16,7 @@ from docling.datamodel import asr_model_specs
 
 # Import the following for backwards compatibility
 from docling.datamodel.accelerator_options import AcceleratorDevice, AcceleratorOptions
+from docling.datamodel.asr_model_specs import WHISPER_TINY as whisper_tiny
 from docling.datamodel.pipeline_options_asr_model import (
     InlineAsrOptions,
 )

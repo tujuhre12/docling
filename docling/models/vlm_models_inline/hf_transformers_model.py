@@ -15,7 +15,7 @@ from docling.datamodel.pipeline_options_vlm_model import (
     TransformersModelType,
     TransformersPromptStyle,
 )
-from docling.models.base_model import BasePageModel
+from docling.models.base_model import BasePageModel, BaseVlmModel
 from docling.models.utils.hf_model_download import (
     HuggingFaceModelDownloadMixin,
 )
@@ -25,7 +25,7 @@ from docling.utils.profiling import TimeRecorder
 _log = logging.getLogger(__name__)
 
 
-class HuggingFaceTransformersVlmModel(BasePageModel, HuggingFaceModelDownloadMixin):
+class HuggingFaceTransformersVlmModel(BaseVlmModel, HuggingFaceModelDownloadMixin):
     def __init__(
         self,
         enabled: bool,
@@ -36,6 +36,9 @@ class HuggingFaceTransformersVlmModel(BasePageModel, HuggingFaceModelDownloadMix
         self.enabled = enabled
 
         self.vlm_options = vlm_options
+
+        self.scale = self.vlm_options.scale
+        self.max_size = self.vlm_options.max_size
 
         if self.enabled:
             import torch

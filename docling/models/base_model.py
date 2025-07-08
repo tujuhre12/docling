@@ -3,6 +3,7 @@ from collections.abc import Iterable
 from typing import Generic, Optional, Protocol, Type
 
 from docling_core.types.doc import BoundingBox, DocItem, DoclingDocument, NodeItem
+from PIL import Image
 from typing_extensions import TypeVar
 
 from docling.datamodel.base_models import ItemAndImageEnrichmentElement, Page
@@ -19,10 +20,23 @@ class BaseModelWithOptions(Protocol):
 
 
 class BasePageModel(ABC):
+    scale: float  # scale with which the page-image needs to be created (dpi = 72*scale)
+    max_size: int  # max size of width/height of page-image
+
     @abstractmethod
     def __call__(
         self, conv_res: ConversionResult, page_batch: Iterable[Page]
     ) -> Iterable[Page]:
+        pass
+
+class BaseLayoutModel(BasePageModel):
+    @abstractmethod
+    def predict_on_page_image(self, *, page_image: Image.Image) -> list(Cluster):
+        pass    
+
+class BaseVlmModel(BasePageModel):
+    @abstractmethod
+    def predict_on_page_image(self, *, page_image: Image.Image, prompt: str) -> str:
         pass
 
 

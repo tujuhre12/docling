@@ -10,7 +10,7 @@ from docling.datamodel.accelerator_options import (
 from docling.datamodel.base_models import Page, VlmPrediction, VlmPredictionToken
 from docling.datamodel.document import ConversionResult
 from docling.datamodel.pipeline_options_vlm_model import InlineVlmOptions
-from docling.models.base_model import BasePageModel
+from docling.models.base_model import BasePageModel, BaseVlmModel
 from docling.models.utils.hf_model_download import (
     HuggingFaceModelDownloadMixin,
 )
@@ -19,7 +19,7 @@ from docling.utils.profiling import TimeRecorder
 _log = logging.getLogger(__name__)
 
 
-class HuggingFaceMlxModel(BasePageModel, HuggingFaceModelDownloadMixin):
+class HuggingFaceMlxModel(BaseVlmModel, HuggingFaceModelDownloadMixin):
     def __init__(
         self,
         enabled: bool,
@@ -28,10 +28,12 @@ class HuggingFaceMlxModel(BasePageModel, HuggingFaceModelDownloadMixin):
         vlm_options: InlineVlmOptions,
     ):
         self.enabled = enabled
-
         self.vlm_options = vlm_options
+
         self.max_tokens = vlm_options.max_new_tokens
         self.temperature = vlm_options.temperature
+        self.scale = self.vlm_options.scale
+        self.max_size = self.vlm_options.max_size
 
         if self.enabled:
             try:

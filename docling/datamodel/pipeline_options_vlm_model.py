@@ -6,6 +6,7 @@ from pydantic import AnyUrl, BaseModel
 from typing_extensions import deprecated
 
 from docling.datamodel.accelerator_options import AcceleratorDevice
+from docling.datamodel.pipeline_options import LayoutOptions
 
 
 class BaseVlmOptions(BaseModel):
@@ -90,7 +91,7 @@ class ApiVlmOptions(BaseVlmOptions):
 
 
 class TwoStageVlmOptions(BaseVlmOptions):
-    kind: Literal["inline_model_options"] = "inline_two_stage_model_options"
+    kind: Literal["inline_two_stage_model_options"] = "inline_two_stage_model_options"
 
-    vlm_options: UnionInlineVlmOptions
+    vlm_options: InlineVlmOptions
     layout_options: LayoutOptions

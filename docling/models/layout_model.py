@@ -7,6 +7,7 @@ from typing import Optional
 
 import numpy as np
 from docling_core.types.doc import DocItemLabel
+from docling_core.types.doc.page import TextCell
 from PIL import Image
 
 from docling.datamodel.accelerator_options import AcceleratorOptions
@@ -176,11 +177,11 @@ class LayoutModel(BasePageModel):
                         )
                         clusters.append(cluster)
                     """
-                    clusters = self.predict_on_page(page_image)
-                    
+                    predicted_clusters = self.predict_on_page(page_image=page_image)
+
                     if settings.debug.visualize_raw_layout:
                         self.draw_clusters_and_cells_side_by_side(
-                            conv_res, page, clusters, mode_prefix="raw"
+                            conv_res, page, predicted_clusters, mode_prefix="raw"
                         )
 
                     # Apply postprocessing
@@ -212,8 +213,28 @@ class LayoutModel(BasePageModel):
                         clusters=processed_clusters
                     )
                     """
-                    page, processed_clusters, processed_cells = self.postprocess_on_page(page, cluster)
-                    
+                    page, processed_clusters, processed_cells = (
+                        self.postprocess_on_page(page=page, clusters=predicted_clusters)
+                    )
+
+                    with warnings.catch_warnings():
+                        warnings.filterwarnings(
+                            "ignore",
+                            "Mean of empty slice|invalid value encountered in scalar divide",
+                            RuntimeWarning,
+                            "numpy",
+                        )
+
+                        conv_res.confidence.pages[page.page_no].layout_score = float(
+                            np.mean([c.confidence for c in processed_clusters])
+                        )
+
+                        conv_res.confidence.pages[page.page_no].ocr_score = float(
+                            np.mean(
+                                [c.confidence for c in processed_cells if c.from_ocr]
+                            )
+                        )
+
                 if settings.debug.visualize_layout:
                     self.draw_clusters_and_cells_side_by_side(
                         conv_res, page, processed_clusters, mode_prefix="postprocessed"
@@ -221,17 +242,13 @@ class LayoutModel(BasePageModel):
 
                 yield page
 
-    def predict_on_page(self, page_image: Image) -> list[Cluster]:
-
+    def predict_on_page(self, *, page_image: Image.Image) -> list[Cluster]:
         pred_items = self.layout_predictor.predict(page_image)
 
         clusters = []
         for ix, pred_item in enumerate(pred_items):
             label = DocItemLabel(
-                pred_item["label"]
-                .lower()
-                .replace(" ", "_")
-                .replace("-", "_")
+                pred_item["label"].lower().replace(" ", "_").replace("-", "_")
             )  # Temporary, until docling-ibm-model uses docling-core types
             cluster = Cluster(
                 id=ix,
@@ -241,36 +258,17 @@ class LayoutModel(BasePageModel):
                 cells=[],
             )
             clusters.append(cluster)
-            
+
         return clusters
 
-    def postprocess_on_page(self, page: Page, cluster: list(Cluster)):
-
+    def postprocess_on_page(
+        self, *, page: Page, clusters: list[Cluster]
+    ) -> tuple[Page, list[Cluster], list[TextCell]]:
         processed_clusters, processed_cells = LayoutPostprocessor(
             page, clusters, self.options
         ).postprocess()
         # Note: LayoutPostprocessor updates page.cells and page.parsed_page internally
-        
-        with warnings.catch_warnings():
-            warnings.filterwarnings(
-                "ignore",
-                "Mean of empty slice|invalid value encountered in scalar divide",
-                RuntimeWarning,
-                "numpy",
-            )
 
-            conv_res.confidence.pages[page.page_no].layout_score = float(
-                np.mean([c.confidence for c in processed_clusters])
-            )
-            
-            conv_res.confidence.pages[page.page_no].ocr_score = float(
-                np.mean(
-                    [c.confidence for c in processed_cells if c.from_ocr]
-                )
-            )
-
-            page.predictions.layout = LayoutPrediction(
-                clusters=processed_clusters
-            )
+        page.predictions.layout = LayoutPrediction(clusters=processed_clusters)
 
         return page, processed_clusters, processed_cells

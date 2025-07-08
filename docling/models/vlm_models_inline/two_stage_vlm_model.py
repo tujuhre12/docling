@@ -15,7 +15,8 @@ from docling.datamodel.pipeline_options_vlm_model import (
     TransformersModelType,
     TransformersPromptStyle,
 )
-from docling.models.base_model import BasePageModel
+from docling.models.base_model import BasePageModel, BaseVlmModel
+from docling.models.layout_model import LayoutModel
 from docling.models.utils.hf_model_download import (
     HuggingFaceModelDownloadMixin,
 )
@@ -29,11 +30,11 @@ class TwoStageVlmModel(BasePageModel, HuggingFaceModelDownloadMixin):
     def __init__(
         self,
         *,
-        layout_model: LayoutModelModel,
-        vlm_model: BasePageModel,
+        layout_model: LayoutModel,
+        vlm_model: BaseVlmModel,
     ):
-        self.layout_model = layout_options
-        self.vlm_model = vlm_options
+        self.layout_model = layout_model
+        self.vlm_model = vlm_model
 
     def __call__(
         self, conv_res: ConversionResult, page_batch: Iterable[Page]
@@ -47,23 +48,27 @@ class TwoStageVlmModel(BasePageModel, HuggingFaceModelDownloadMixin):
                     assert page.size is not None
 
                     page_image = page.get_image(
-                        scale=self.vlm_options.scale, max_size=self.vlm_options.max_size
+                        scale=self.vlm_model.scale, max_size=self.vlm_model.max_size
                     )
 
-                    pred_clusters = self.layout_model.predict_on_page(page_image)
-                    page, processed_clusters, processed_cells = self.layout_model.postprocess_on_page(page=page,
-                                                                                                      page_image=page_image)
-                    
+                    pred_clusters = self.layout_model.predict_on_page(page_image=page_image)
+                    page, processed_clusters, processed_cells = (
+                        self.layout_model.postprocess_on_page(
+                            page=page, clusters=pred_clusters
+                        )
+                    )
+
                     # Define prompt structure
                     if callable(self.vlm_options.prompt):
                         user_prompt = self.vlm_options.prompt(page.parsed_page)
                     else:
                         user_prompt = self.vlm_options.prompt
-                        
+
                     prompt = self.formulate_prompt(user_prompt, processed_clusters)
 
-                    generated_text, generation_time = self.vlm_model.predict_on_image(page_image=page_image,
-                                                                                      prompt=prompt)
+                    generated_text, generation_time = self.vlm_model.predict_on_image(
+                        page_image=page_image, prompt=prompt
+                    )
 
                     page.predictions.vlm_response = VlmPrediction(
                         text=generated_text,
@@ -72,7 +77,7 @@ class TwoStageVlmModel(BasePageModel, HuggingFaceModelDownloadMixin):
 
                 yield page
 
-    def formulate_prompt(self, user_prompt: str, clusters:list[Cluster]) -> str:
+    def formulate_prompt(self, user_prompt: str, clusters: list[Cluster]) -> str:
         """Formulate a prompt for the VLM."""
 
         if self.vlm_options.transformers_prompt_style == TransformersPromptStyle.RAW:

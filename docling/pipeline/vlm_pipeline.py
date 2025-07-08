@@ -26,9 +26,7 @@ from docling.backend.md_backend import MarkdownDocumentBackend
 from docling.backend.pdf_backend import PdfDocumentBackend
 from docling.datamodel.base_models import InputFormat, Page
 from docling.datamodel.document import ConversionResult, InputDocument
-from docling.datamodel.pipeline_options import (
-    VlmPipelineOptions,
-)
+from docling.datamodel.pipeline_options import TwoStageVlmOptions, VlmPipelineOptions
 from docling.datamodel.pipeline_options_vlm_model import (
     ApiVlmOptions,
     InferenceFramework,
@@ -37,14 +35,16 @@ from docling.datamodel.pipeline_options_vlm_model import (
 )
 from docling.datamodel.settings import settings
 from docling.models.api_vlm_model import ApiVlmModel
+from docling.models.layout_model import LayoutModel
 from docling.models.vlm_models_inline.hf_transformers_model import (
     HuggingFaceTransformersVlmModel,
 )
 from docling.models.vlm_models_inline.mlx_model import HuggingFaceMlxModel
+from docling.models.vlm_models_inline.two_stage_vlm_model import (
+    TwoStageVlmModel,
+)
 from docling.pipeline.base_pipeline import PaginatedPipeline
 from docling.utils.profiling import ProfilingScope, TimeRecorder
-
-from docling.models.layout_model import LayoutModel
 
 _log = logging.getLogger(__name__)
 
@@ -110,7 +110,9 @@ class VlmPipeline(PaginatedPipeline):
                     f"Could not instantiate the right type of VLM pipeline: {vlm_options.inference_framework}"
                 )
         elif isinstance(self.pipeline_options.vlm_options, TwoStageVlmOptions):
-            twostagevlm_options = cast(TwoStageVlmOptions, self.pipeline_options.vlm_options)
+            twostagevlm_options = cast(
+                TwoStageVlmOptions, self.pipeline_options.vlm_options
+            )
 
             layout_options = twostagevlm_options.lay_options
             vlm_options = twostagevlm_options.vlm_options
@@ -120,7 +122,7 @@ class VlmPipeline(PaginatedPipeline):
                 accelerator_options=pipeline_options.accelerator_options,
                 options=layout_options,
             )
-            
+
             if vlm_options.inference_framework == InferenceFramework.MLX:
                 vlm_model = HuggingFaceMlxModel(
                     enabled=True,  # must be always enabled for this pipeline to make sense.
@@ -145,7 +147,7 @@ class VlmPipeline(PaginatedPipeline):
                 raise ValueError(
                     f"Could not instantiate the right type of VLM pipeline: {vlm_options.inference_framework}"
                 )
-            
+
         self.enrichment_pipe = [
             # Other models working on `NodeItem` elements in the DoclingDocument
         ]
