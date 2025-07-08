@@ -13,6 +13,7 @@ from docling.datamodel.accelerator_options import AcceleratorOptions
 from docling.datamodel.base_models import BoundingBox, Cluster, LayoutPrediction, Page
 from docling.datamodel.document import ConversionResult
 from docling.datamodel.layout_model_specs import DOCLING_LAYOUT_V2, LayoutModelConfig
+from docling.datamodel.pipeline_options import LayoutOptions
 from docling.datamodel.settings import settings
 from docling.models.base_model import BasePageModel
 from docling.models.utils.hf_model_download import download_hf_model
@@ -49,12 +50,14 @@ class LayoutModel(BasePageModel):
         self,
         artifacts_path: Optional[Path],
         accelerator_options: AcceleratorOptions,
-        layout_model_config: LayoutModelConfig,
+        options: LayoutOptions,
     ):
         from docling_ibm_models.layoutmodel.layout_predictor import LayoutPredictor
 
+        self.options = options
+
         device = decide_device(accelerator_options.device)
-        self.layout_model_config = layout_model_config
+        layout_model_config = options.model
         model_repo_folder = layout_model_config.model_repo_folder
         model_path = layout_model_config.model_path
 
@@ -182,7 +185,7 @@ class LayoutModel(BasePageModel):
                     # Apply postprocessing
 
                     processed_clusters, processed_cells = LayoutPostprocessor(
-                        page, clusters
+                        page, clusters, self.options
                     ).postprocess()
                     # Note: LayoutPostprocessor updates page.cells and page.parsed_page internally
 
