@@ -16,9 +16,7 @@ from docling.datamodel import asr_model_specs
 
 # Import the following for backwards compatibility
 from docling.datamodel.accelerator_options import AcceleratorDevice, AcceleratorOptions
-
 from docling.datamodel.asr_model_specs import WHISPER_TINY as whisper_tiny
-
 from docling.datamodel.layout_model_specs import (
     LayoutModelConfig,
     docling_layout_egret_large,
@@ -28,7 +26,6 @@ from docling.datamodel.layout_model_specs import (
     docling_layout_heron_101,
     docling_layout_v2,
 )
-
 from docling.datamodel.pipeline_options_asr_model import (
     InlineAsrOptions,
 )

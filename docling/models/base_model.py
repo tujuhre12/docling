@@ -6,7 +6,12 @@ from docling_core.types.doc import BoundingBox, DocItem, DoclingDocument, NodeIt
 from PIL import Image
 from typing_extensions import TypeVar
 
-from docling.datamodel.base_models import ItemAndImageEnrichmentElement, Page
+from docling.datamodel.base_models import (
+    Cluster,
+    ItemAndImageEnrichmentElement,
+    Page,
+    TextCell,
+)
 from docling.datamodel.document import ConversionResult
 from docling.datamodel.pipeline_options import BaseOptions
 from docling.datamodel.settings import settings
@@ -29,10 +34,18 @@ class BasePageModel(ABC):
     ) -> Iterable[Page]:
         pass
 
+
 class BaseLayoutModel(BasePageModel):
     @abstractmethod
-    def predict_on_page_image(self, *, page_image: Image.Image) -> list(Cluster):
-        pass    
+    def predict_on_page_image(self, *, page_image: Image.Image) -> list[Cluster]:
+        pass
+
+    @abstractmethod
+    def postprocess_on_page_image(
+        self, *, page: Page, clusters: list[Cluster]
+    ) -> tuple[Page, list[Cluster], list[TextCell]]:
+        pass
+
 
 class BaseVlmModel(BasePageModel):
     @abstractmethod

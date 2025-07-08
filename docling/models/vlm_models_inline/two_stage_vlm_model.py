@@ -8,14 +8,14 @@ from typing import Any, Optional
 from docling.datamodel.accelerator_options import (
     AcceleratorOptions,
 )
-from docling.datamodel.base_models import Page, VlmPrediction
+from docling.datamodel.base_models import Cluster, Page, VlmPrediction
 from docling.datamodel.document import ConversionResult
 from docling.datamodel.pipeline_options_vlm_model import (
     InlineVlmOptions,
     TransformersModelType,
     TransformersPromptStyle,
 )
-from docling.models.base_model import BasePageModel, BaseVlmModel
+from docling.models.base_model import BaseLayoutModel, BasePageModel, BaseVlmModel
 from docling.models.layout_model import LayoutModel
 from docling.models.utils.hf_model_download import (
     HuggingFaceModelDownloadMixin,
@@ -30,7 +30,7 @@ class TwoStageVlmModel(BasePageModel, HuggingFaceModelDownloadMixin):
     def __init__(
         self,
         *,
-        layout_model: LayoutModel,
+        layout_model: BaseLayoutModel,
         vlm_model: BaseVlmModel,
     ):
         self.layout_model = layout_model
@@ -51,13 +51,17 @@ class TwoStageVlmModel(BasePageModel, HuggingFaceModelDownloadMixin):
                         scale=self.vlm_model.scale, max_size=self.vlm_model.max_size
                     )
 
-                    pred_clusters = self.layout_model.predict_on_page(page_image=page_image)
+                    assert page_image is not None
+
+                    pred_clusters = self.layout_model.predict_on_page_image(
+                        page_image=page_image
+                    )
                     page, processed_clusters, processed_cells = (
-                        self.layout_model.postprocess_on_page(
+                        self.layout_model.postprocess_on_page_image(
                             page=page, clusters=pred_clusters
                         )
                     )
-
+                    
                     # Define prompt structure
                     if callable(self.vlm_options.prompt):
                         user_prompt = self.vlm_options.prompt(page.parsed_page)
