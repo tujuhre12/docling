@@ -4,6 +4,8 @@ from collections.abc import Iterable
 from pathlib import Path
 from typing import Optional
 
+from PIL import Image
+
 from docling.datamodel.accelerator_options import (
     AcceleratorOptions,
 )
@@ -33,7 +35,7 @@ class HuggingFaceMlxModel(BaseVlmModel, HuggingFaceModelDownloadMixin):
         self.max_tokens = vlm_options.max_new_tokens
         self.temperature = vlm_options.temperature
         self.scale = self.vlm_options.scale
-        self.max_size = self.vlm_options.max_size
+        # self.max_size = self.vlm_options.max_size
 
         if self.enabled:
             try:
@@ -62,6 +64,55 @@ class HuggingFaceMlxModel(BaseVlmModel, HuggingFaceModelDownloadMixin):
             self.vlm_model, self.processor = load(artifacts_path)
             self.config = load_config(artifacts_path)
 
+    def get_user_prompt(self, page: Optional[Page]) -> str:
+        if callable(self.vlm_options.prompt) and page is not None:
+            return self.vlm_options.prompt(page.parsed_page)
+        else:
+            user_prompt = self.vlm_options.prompt
+            prompt = self.apply_chat_template(
+                self.processor, self.config, user_prompt, num_images=1
+            )
+            return prompt
+
+    def predict_on_page_image(
+        self, *, page_image: Image.Image, prompt: str, output_tokens: bool = False
+    ) -> tuple[str, Optional[list[VlmPredictionToken]]]:
+        tokens = []
+        output = ""
+        for token in self.stream_generate(
+            self.vlm_model,
+            self.processor,
+            prompt,
+            [page_image],
+            max_tokens=self.max_tokens,
+            verbose=False,
+            temp=self.temperature,
+        ):
+            if len(token.logprobs.shape) == 1:
+                tokens.append(
+                    VlmPredictionToken(
+                        text=token.text,
+                        token=token.token,
+                        logprob=token.logprobs[token.token],
+                    )
+                )
+            elif len(token.logprobs.shape) == 2 and token.logprobs.shape[0] == 1:
+                tokens.append(
+                    VlmPredictionToken(
+                        text=token.text,
+                        token=token.token,
+                        logprob=token.logprobs[0, token.token],
+                    )
+                )
+            else:
+                _log.warning(f"incompatible shape for logprobs: {token.logprobs.shape}")
+
+            output += token.text
+            if "</doctag>" in token.text:
+                break
+
+        return output, tokens
+
     def __call__(
         self, conv_res: ConversionResult, page_batch: Iterable[Page]
     ) -> Iterable[Page]:
@@ -73,19 +124,23 @@ class HuggingFaceMlxModel(BaseVlmModel, HuggingFaceModelDownloadMixin):
                 with TimeRecorder(conv_res, f"vlm-mlx-{self.vlm_options.repo_id}"):
                     assert page.size is not None
 
-                    hi_res_image = page.get_image(
+                    page_image = page.get_image(
                         scale=self.vlm_options.scale, max_size=self.vlm_options.max_size
                     )
-                    if hi_res_image is not None:
-                        im_width, im_height = hi_res_image.size
+                    """
+                    if page_image is not None:
+                        im_width, im_height = page_image.size
+                    """
+                    assert page_image is not None
 
                     # populate page_tags with predicted doc tags
                     page_tags = ""
 
-                    if hi_res_image:
-                        if hi_res_image.mode != "RGB":
-                            hi_res_image = hi_res_image.convert("RGB")
+                    if page_image:
+                        if page_image.mode != "RGB":
+                            page_image = page_image.convert("RGB")
 
+                    """
                     if callable(self.vlm_options.prompt):
                         user_prompt = self.vlm_options.prompt(page.parsed_page)
                     else:
@@ -93,11 +148,12 @@ class HuggingFaceMlxModel(BaseVlmModel, HuggingFaceModelDownloadMixin):
                     prompt = self.apply_chat_template(
                         self.processor, self.config, user_prompt, num_images=1
                     )
-
-                    start_time = time.time()
-                    _log.debug("start generating ...")
+                    """
+                    prompt = self.get_user_prompt(page)
 
                     # Call model to generate:
+                    start_time = time.time()
+                    """
                     tokens: list[VlmPredictionToken] = []
 
                     output = ""
@@ -105,7 +161,7 @@ class HuggingFaceMlxModel(BaseVlmModel, HuggingFaceModelDownloadMixin):
                         self.vlm_model,
                         self.processor,
                         prompt,
-                        [hi_res_image],
+                        [page_image],
                         max_tokens=self.max_tokens,
                         verbose=False,
                         temp=self.temperature,
@@ -137,13 +193,20 @@ class HuggingFaceMlxModel(BaseVlmModel, HuggingFaceModelDownloadMixin):
                         output += token.text
                         if "</doctag>" in token.text:
                             break
+                    """
+                    output, tokens = self.predict_on_page_image(
+                        page_image=page_image, prompt=prompt, output_tokens=True
+                    )
 
                     generation_time = time.time() - start_time
                     page_tags = output
 
+                    """
                     _log.debug(
                         f"{generation_time:.2f} seconds for {len(tokens)} tokens ({len(tokens) / generation_time} tokens/sec)."
                     )
+                    """
+
                     page.predictions.vlm_response = VlmPrediction(
                         text=page_tags,
                         generation_time=generation_time,

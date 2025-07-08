@@ -11,6 +11,7 @@ from docling.datamodel.base_models import (
     ItemAndImageEnrichmentElement,
     Page,
     TextCell,
+    VlmPredictionToken,
 )
 from docling.datamodel.document import ConversionResult
 from docling.datamodel.pipeline_options import BaseOptions
@@ -49,7 +50,13 @@ class BaseLayoutModel(BasePageModel):
 
 class BaseVlmModel(BasePageModel):
     @abstractmethod
-    def predict_on_page_image(self, *, page_image: Image.Image, prompt: str) -> str:
+    def get_user_prompt(self, page: Optional[Page]) -> str:
+        pass
+
+    @abstractmethod
+    def predict_on_page_image(
+        self, *, page_image: Image.Image, prompt: str, output_tokens: bool = False
+    ) -> tuple[str, Optional[list[VlmPredictionToken]]]:
         pass
 
 

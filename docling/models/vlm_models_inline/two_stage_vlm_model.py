@@ -61,64 +61,24 @@ class TwoStageVlmModel(BasePageModel, HuggingFaceModelDownloadMixin):
                             page=page, clusters=pred_clusters
                         )
                     )
-                    
-                    # Define prompt structure
-                    if callable(self.vlm_options.prompt):
-                        user_prompt = self.vlm_options.prompt(page.parsed_page)
-                    else:
-                        user_prompt = self.vlm_options.prompt
 
-                    prompt = self.formulate_prompt(user_prompt, processed_clusters)
+                    user_prompt = self.vlm_model.get_user_prompt(page=page)
+                    prompt = self.formulate_prompt(
+                        user_prompt=user_prompt, clusters=processed_clusters
+                    )
 
-                    generated_text, generation_time = self.vlm_model.predict_on_image(
+                    start_time = time.time()
+                    generated_text = self.vlm_model.predict_on_page_image(
                         page_image=page_image, prompt=prompt
                     )
 
                     page.predictions.vlm_response = VlmPrediction(
-                        text=generated_text,
-                        generation_time=generation_time,
+                        text=generated_text, generation_time=time.time() - start_time
                     )
 
                 yield page
 
-    def formulate_prompt(self, user_prompt: str, clusters: list[Cluster]) -> str:
+    def formulate_prompt(self, *, user_prompt: str, clusters: list[Cluster]) -> str:
         """Formulate a prompt for the VLM."""
 
-        if self.vlm_options.transformers_prompt_style == TransformersPromptStyle.RAW:
-            return user_prompt
-
-        elif self.vlm_options.repo_id == "microsoft/Phi-4-multimodal-instruct":
-            _log.debug("Using specialized prompt for Phi-4")
-            # more info here: https://huggingface.co/microsoft/Phi-4-multimodal-instruct#loading-the-model-locally
-
-            user_prompt = "<|user|>"
-            assistant_prompt = "<|assistant|>"
-            prompt_suffix = "<|end|>"
-
-            prompt = f"{user_prompt}<|image_1|>{user_prompt}{prompt_suffix}{assistant_prompt}"
-            _log.debug(f"prompt for {self.vlm_options.repo_id}: {prompt}")
-
-            return prompt
-
-        elif self.vlm_options.transformers_prompt_style == TransformersPromptStyle.CHAT:
-            messages = [
-                {
-                    "role": "user",
-                    "content": [
-                        {
-                            "type": "text",
-                            "text": "This is a page from a document.",
-                        },
-                        {"type": "image"},
-                        {"type": "text", "text": user_prompt},
-                    ],
-                }
-            ]
-            prompt = self.processor.apply_chat_template(
-                messages, add_generation_prompt=False
-            )
-            return prompt
-
-        raise RuntimeError(
-            f"Uknown prompt style `{self.vlm_options.transformers_prompt_style}`. Valid values are {', '.join(s.value for s in TransformersPromptStyle)}."
-        )
+        return user_prompt
