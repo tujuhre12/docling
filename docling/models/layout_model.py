@@ -16,7 +16,7 @@ from docling.datamodel.document import ConversionResult
 from docling.datamodel.layout_model_specs import LayoutModelConfig, docling_layout_v2
 from docling.datamodel.pipeline_options import LayoutOptions
 from docling.datamodel.settings import settings
-from docling.models.base_model import BasePageModel
+from docling.models.base_model import BaseLayoutModel
 from docling.models.utils.hf_model_download import download_hf_model
 from docling.utils.accelerator_utils import decide_device
 from docling.utils.layout_postprocessor import LayoutPostprocessor
@@ -26,7 +26,7 @@ from docling.utils.visualization import draw_clusters
 _log = logging.getLogger(__name__)
 
 
-class LayoutModel(BasePageModel):
+class LayoutModel(BaseLayoutModel):
     TEXT_ELEM_LABELS = [
         DocItemLabel.TEXT,
         DocItemLabel.FOOTNOTE,
@@ -179,7 +179,9 @@ class LayoutModel(BasePageModel):
                         )
                         clusters.append(cluster)
                     """
-                    predicted_clusters = self.predict_on_page(page_image=page_image)
+                    predicted_clusters = self.predict_on_page_image(
+                        page_image=page_image
+                    )
 
                     if settings.debug.visualize_raw_layout:
                         self.draw_clusters_and_cells_side_by_side(
@@ -216,7 +218,9 @@ class LayoutModel(BasePageModel):
                     )
                     """
                     page, processed_clusters, processed_cells = (
-                        self.postprocess_on_page(page=page, clusters=predicted_clusters)
+                        self.postprocess_on_page_image(
+                            page=page, clusters=predicted_clusters
+                        )
                     )
 
                     with warnings.catch_warnings():
@@ -244,7 +248,7 @@ class LayoutModel(BasePageModel):
 
                 yield page
 
-    def predict_on_page(self, *, page_image: Image.Image) -> list[Cluster]:
+    def predict_on_page_image(self, *, page_image: Image.Image) -> list[Cluster]:
         pred_items = self.layout_predictor.predict(page_image)
 
         clusters = []
@@ -263,7 +267,7 @@ class LayoutModel(BasePageModel):
 
         return clusters
 
-    def postprocess_on_page(
+    def postprocess_on_page_image(
         self, *, page: Page, clusters: list[Cluster]
     ) -> tuple[Page, list[Cluster], list[TextCell]]:
         processed_clusters, processed_cells = LayoutPostprocessor(

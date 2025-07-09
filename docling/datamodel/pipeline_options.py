@@ -16,7 +16,15 @@ from docling.datamodel import asr_model_specs
 
 # Import the following for backwards compatibility
 from docling.datamodel.accelerator_options import AcceleratorDevice, AcceleratorOptions
-from docling.datamodel.asr_model_specs import WHISPER_TINY as whisper_tiny
+from docling.datamodel.asr_model_specs import (
+    WHISPER_BASE,
+    WHISPER_LARGE,
+    WHISPER_MEDIUM,
+    WHISPER_SMALL,
+    WHISPER_TINY,
+    WHISPER_TINY as whisper_tiny,
+    WHISPER_TURBO,
+)
 from docling.datamodel.layout_model_specs import (
     LayoutModelConfig,
     docling_layout_egret_large,
@@ -279,13 +287,12 @@ class VlmPipelineOptions(PaginatedPipelineOptions):
 class LayoutOptions(BaseModel):
     """Options for layout processing."""
 
-    repo_id: str = "ds4sd/docling-layout-heron"
     create_orphan_clusters: bool = True  # Whether to create clusters for orphaned cells
     model_spec: LayoutModelConfig = docling_layout_v2
 
 
 class AsrPipelineOptions(PipelineOptions):
-    asr_options: Union[InlineAsrOptions] = asr_model_specs.WHISPER_TINY
+    asr_options: Union[InlineAsrOptions] = WHISPER_TINY
     artifacts_path: Optional[Union[Path, str]] = None
 
 

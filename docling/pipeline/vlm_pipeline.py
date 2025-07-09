@@ -115,7 +115,7 @@ class VlmPipeline(PaginatedPipeline):
                 TwoStageVlmOptions, self.pipeline_options.vlm_options
             )
 
-            layout_options = twostagevlm_options.lay_options
+            layout_options = twostagevlm_options.layout_options
             vlm_options = twostagevlm_options.vlm_options
 
             layout_model = LayoutModel(
@@ -125,24 +125,24 @@ class VlmPipeline(PaginatedPipeline):
             )
 
             if vlm_options.inference_framework == InferenceFramework.MLX:
-                vlm_model = HuggingFaceMlxModel(
+                vlm_model_mlx = HuggingFaceMlxModel(
                     enabled=True,  # must be always enabled for this pipeline to make sense.
                     artifacts_path=artifacts_path,
                     accelerator_options=pipeline_options.accelerator_options,
                     vlm_options=vlm_options,
                 )
                 self.build_pipe = [
-                    TwoStageVlmModel(layout_model=layout_model, vlm_model=vlm_model)
+                    TwoStageVlmModel(layout_model=layout_model, vlm_model=vlm_model_mlx)
                 ]
             elif vlm_options.inference_framework == InferenceFramework.TRANSFORMERS:
-                vlm_model = HuggingFaceTransformersVlmModel(
+                vlm_model_hf = HuggingFaceTransformersVlmModel(
                     enabled=True,  # must be always enabled for this pipeline to make sense.
                     artifacts_path=artifacts_path,
                     accelerator_options=pipeline_options.accelerator_options,
                     vlm_options=vlm_options,
                 )
                 self.build_pipe = [
-                    TwoStageVlmModel(layout_model=layout_model, vlm_model=vlm_model)
+                    TwoStageVlmModel(layout_model=layout_model, vlm_model=vlm_model_hf)
                 ]
             else:
                 raise ValueError(
