@@ -6,7 +6,10 @@ from pydantic import (
 )
 
 from docling.datamodel.accelerator_options import AcceleratorDevice
-from docling.datamodel.layout_model_specs import docling_layout_heron
+from docling.datamodel.layout_model_specs import (
+    DOCLING_LAYOUT_HERON,
+    DOCLING_LAYOUT_V2,
+)
 from docling.datamodel.pipeline_options_vlm_model import (
     ApiVlmOptions,
     InferenceFramework,
@@ -140,7 +143,7 @@ GEMMA3_27B_MLX = InlineVlmOptions(
 )
 
 VLM2STAGE = TwoStageVlmOptions(
-    vlm_options=SMOLDOCLING_MLX, layout_options=docling_layout_heron
+    vlm_options=SMOLDOCLING_MLX, layout_options=DOCLING_LAYOUT_HERON
 )
 
 

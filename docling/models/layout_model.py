@@ -16,7 +16,7 @@ from docling.datamodel.document import ConversionResult
 from docling.datamodel.layout_model_specs import DOCLING_LAYOUT_V2, LayoutModelConfig
 from docling.datamodel.pipeline_options import LayoutOptions
 from docling.datamodel.settings import settings
-from docling.models.base_model import BaseLayoutModel
+from docling.models.base_model import BaseLayoutModel, BasePageModel
 from docling.models.utils.hf_model_download import download_hf_model
 from docling.utils.accelerator_utils import decide_device
 from docling.utils.layout_postprocessor import LayoutPostprocessor
@@ -26,7 +26,7 @@ from docling.utils.visualization import draw_clusters
 _log = logging.getLogger(__name__)
 
 
-class LayoutModel(BasePageModel):
+class LayoutModel(BaseLayoutModel):
     TEXT_ELEM_LABELS = [
         DocItemLabel.TEXT,
         DocItemLabel.FOOTNOTE,

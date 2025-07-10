@@ -14,6 +14,14 @@ from typing_extensions import deprecated
 
 # Import the following for backwards compatibility
 from docling.datamodel.accelerator_options import AcceleratorDevice, AcceleratorOptions
+from docling.datamodel.asr_model_specs import (
+    WHISPER_BASE,
+    WHISPER_LARGE,
+    WHISPER_MEDIUM,
+    WHISPER_SMALL,
+    WHISPER_TINY,
+    WHISPER_TURBO,
+)
 from docling.datamodel.layout_model_specs import (
     DOCLING_LAYOUT_EGRET_LARGE,
     DOCLING_LAYOUT_EGRET_MEDIUM,
