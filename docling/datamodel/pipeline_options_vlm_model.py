@@ -90,7 +90,7 @@ class ApiVlmOptions(BaseVlmOptions):
     response_format: ResponseFormat
 
 
-class TwoStageVlmOptions(BaseVlmOptions):
+class TwoStageVlmOptions(BaseModel):
     kind: Literal["inline_two_stage_model_options"] = "inline_two_stage_model_options"
 
     vlm_options: InlineVlmOptions

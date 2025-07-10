@@ -12,8 +12,6 @@ from pydantic import (
 )
 from typing_extensions import deprecated
 
-from docling.datamodel import asr_model_specs
-
 # Import the following for backwards compatibility
 from docling.datamodel.accelerator_options import AcceleratorDevice, AcceleratorOptions
 from docling.datamodel.asr_model_specs import (

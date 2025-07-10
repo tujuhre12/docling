@@ -6,12 +6,14 @@ from pydantic import (
 )
 
 from docling.datamodel.accelerator_options import AcceleratorDevice
+from docling.datamodel.layout_model_specs import docling_layout_heron
 from docling.datamodel.pipeline_options_vlm_model import (
     ApiVlmOptions,
     InferenceFramework,
     InlineVlmOptions,
     ResponseFormat,
     TransformersModelType,
+    TwoStageVlmOptions,
 )
 
 _log = logging.getLogger(__name__)
@@ -137,8 +139,13 @@ GEMMA3_27B_MLX = InlineVlmOptions(
     temperature=0.0,
 )
 
+VLM2STAGE = TwoStageVlmOptions(
+    vlm_options=SMOLDOCLING_MLX, layout_options=docling_layout_heron
+)
+
 
 class VlmModelType(str, Enum):
     SMOLDOCLING = "smoldocling"
     GRANITE_VISION = "granite_vision"
     GRANITE_VISION_OLLAMA = "granite_vision_ollama"
+    VLM2STAGE = "docling2stage"
