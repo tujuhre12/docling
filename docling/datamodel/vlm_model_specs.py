@@ -153,4 +153,4 @@ class VlmModelType(str, Enum):
     SMOLDOCLING = "smoldocling"
     GRANITE_VISION = "granite_vision"
     GRANITE_VISION_OLLAMA = "granite_vision_ollama"
-    VLM2STAGE = "docling2stage"
+    VLM2STAGE = "vlm2stage"

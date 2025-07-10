@@ -40,7 +40,9 @@ class HuggingFaceTransformersVlmModel(BaseVlmModel, HuggingFaceModelDownloadMixi
         self.vlm_options = vlm_options
 
         self.scale = self.vlm_options.scale
-        # self.max_size = self.vlm_options.max_size
+        self.max_size = 512
+        if isinstance(self.vlm_options.max_size, int):
+            self.max_size = self.vlm_options.max_size
 
         if self.enabled:
             import torch

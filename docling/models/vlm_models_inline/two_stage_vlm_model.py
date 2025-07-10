@@ -50,12 +50,12 @@ class TwoStageVlmModel(BasePageModel, HuggingFaceModelDownloadMixin):
                     page_image = page.get_image(
                         scale=self.vlm_model.scale, max_size=self.vlm_model.max_size
                     )
-
                     assert page_image is not None
 
                     pred_clusters = self.layout_model.predict_on_page_image(
                         page_image=page_image
                     )
+
                     page, processed_clusters, processed_cells = (
                         self.layout_model.postprocess_on_page_image(
                             page=page, clusters=pred_clusters
@@ -68,14 +68,17 @@ class TwoStageVlmModel(BasePageModel, HuggingFaceModelDownloadMixin):
                     )
 
                     start_time = time.time()
-                    generated_text = self.vlm_model.predict_on_page_image(
-                        page_image=page_image, prompt=prompt
+                    generated_text, generated_tokens = (
+                        self.vlm_model.predict_on_page_image(
+                            page_image=page_image, prompt=prompt
+                        )
                     )
 
                     page.predictions.vlm_response = VlmPrediction(
-                        text=generated_text, generation_time=time.time() - start_time
+                        text=generated_text,
+                        generation_time=time.time() - start_time,
+                        generated_tokens=generated_tokens,
                     )
-
                 yield page
 
     def formulate_prompt(self, *, user_prompt: str, clusters: list[Cluster]) -> str:
