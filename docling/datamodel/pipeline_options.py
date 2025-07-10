@@ -278,6 +278,7 @@ class VlmPipelineOptions(PaginatedPipelineOptions):
     # If True, text from backend will be used instead of generated text
     vlm_options: Union[InlineVlmOptions, ApiVlmOptions] = (
         smoldocling_vlm_conversion_options
+        #SMOLDOCLING_TRANSFORMERS
     )
 
 
@@ -293,6 +294,9 @@ class AsrPipelineOptions(PipelineOptions):
     artifacts_path: Optional[Union[Path, str]] = None
 
 
+
+
+    
 class PdfPipelineOptions(PaginatedPipelineOptions):
     """Options for the PDF pipeline."""
 

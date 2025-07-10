@@ -12,7 +12,7 @@ from docling.datamodel.pipeline_options_asr_model import (
     InferenceAsrFramework,
     InlineAsrNativeWhisperOptions,
     InlineAsrOptions,
-    TransformersModelType,
+    # TransformersModelType,
 )
 
 _log = logging.getLogger(__name__)

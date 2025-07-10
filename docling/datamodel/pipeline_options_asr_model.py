@@ -5,10 +5,11 @@ from pydantic import AnyUrl, BaseModel
 from typing_extensions import deprecated
 
 from docling.datamodel.accelerator_options import AcceleratorDevice
-from docling.datamodel.pipeline_options_vlm_model import (
+
+# from docling.datamodel.pipeline_options_vlm_model import (
     # InferenceFramework,
-    TransformersModelType,
-)
+    # TransformersModelType,
+# )
 
 
 class BaseAsrOptions(BaseModel):
