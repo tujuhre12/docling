@@ -64,7 +64,10 @@ class TwoStageVlmModel(BasePageModel, HuggingFaceModelDownloadMixin):
 
                     user_prompt = self.vlm_model.get_user_prompt(page=page)
                     prompt = self.formulate_prompt(
-                        user_prompt=user_prompt, clusters=processed_clusters
+                        user_prompt=user_prompt,
+                        clusters=processed_clusters,
+                        image_width=page_image.width,
+                        image_height=page_image.height,
                     )
 
                     start_time = time.time()
@@ -73,15 +76,44 @@ class TwoStageVlmModel(BasePageModel, HuggingFaceModelDownloadMixin):
                             page_image=page_image, prompt=prompt
                         )
                     )
-
+                    print("generated-text: \n", generated_text, "\n")
                     page.predictions.vlm_response = VlmPrediction(
                         text=generated_text,
                         generation_time=time.time() - start_time,
                         generated_tokens=generated_tokens,
                     )
+                    exit(-1)
+
                 yield page
 
-    def formulate_prompt(self, *, user_prompt: str, clusters: list[Cluster]) -> str:
+    def formulate_prompt(
+        self,
+        *,
+        user_prompt: str,
+        clusters: list[Cluster],
+        image_width: int,
+        image_height: int,
+        vlm_width: int = 512,
+        vlm_height: int = 512,
+    ) -> str:
         """Formulate a prompt for the VLM."""
+
+        known_clusters = ["here is a list of unsorted text-blocks:", "<doctags>"]
+        for cluster in clusters:
+            print(" => ", cluster)
+
+            loc_l = f"<loc_{int(vlm_width * cluster.bbox.l / image_width)}>"
+            loc_b = f"<loc_{int(vlm_height * cluster.bbox.b / image_height)}>"
+            loc_r = f"<loc_{int(vlm_width * cluster.bbox.r / image_width)}>"
+            loc_t = f"<loc_{int(vlm_height * cluster.bbox.t / image_height)}>"
+
+            known_clusters.append(
+                f"<{cluster.label}>{loc_l}{loc_b}{loc_r}{loc_t}</{cluster.label}>"
+            )
+
+        known_clusters.append("</doctags>")
+
+        user_prompt = "\n".join(known_clusters) + f"\n\n{user_prompt}"
+        print("user-prompt: ", user_prompt, "\n")
 
         return user_prompt
