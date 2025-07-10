@@ -143,7 +143,9 @@ GEMMA3_27B_MLX = InlineVlmOptions(
 )
 
 VLM2STAGE = TwoStageVlmOptions(
-    vlm_options=SMOLDOCLING_MLX, layout_options=DOCLING_LAYOUT_HERON
+    vlm_options=SMOLDOCLING_MLX,
+    layout_options=DOCLING_LAYOUT_HERON,
+    response_format=SMOLDOCLING_MLX.response_format,
 )
 
 

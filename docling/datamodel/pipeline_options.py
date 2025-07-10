@@ -39,6 +39,7 @@ from docling.datamodel.pipeline_options_vlm_model import (
     InferenceFramework,
     InlineVlmOptions,
     ResponseFormat,
+    TwoStageVlmOptions,
 )
 from docling.datamodel.vlm_model_specs import (
     GRANITE_VISION_OLLAMA as granite_vision_vlm_ollama_conversion_options,
@@ -276,9 +277,9 @@ class VlmPipelineOptions(PaginatedPipelineOptions):
         False  # (To be used with vlms, or other generative models)
     )
     # If True, text from backend will be used instead of generated text
-    vlm_options: Union[InlineVlmOptions, ApiVlmOptions] = (
+    vlm_options: Union[InlineVlmOptions, ApiVlmOptions, TwoStageVlmOptions] = (
         smoldocling_vlm_conversion_options
-        #SMOLDOCLING_TRANSFORMERS
+        # SMOLDOCLING_TRANSFORMERS
     )
 
 
@@ -294,9 +295,6 @@ class AsrPipelineOptions(PipelineOptions):
     artifacts_path: Optional[Union[Path, str]] = None
 
 
-
-
-    
 class PdfPipelineOptions(PaginatedPipelineOptions):
     """Options for the PDF pipeline."""
 

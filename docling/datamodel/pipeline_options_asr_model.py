@@ -7,8 +7,8 @@ from typing_extensions import deprecated
 from docling.datamodel.accelerator_options import AcceleratorDevice
 
 # from docling.datamodel.pipeline_options_vlm_model import (
-    # InferenceFramework,
-    # TransformersModelType,
+# InferenceFramework,
+# TransformersModelType,
 # )
 
 

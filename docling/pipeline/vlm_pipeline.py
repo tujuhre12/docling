@@ -26,7 +26,7 @@ from docling.backend.md_backend import MarkdownDocumentBackend
 from docling.backend.pdf_backend import PdfDocumentBackend
 from docling.datamodel.base_models import InputFormat, Page
 from docling.datamodel.document import ConversionResult, InputDocument
-from docling.datamodel.pipeline_options import VlmPipelineOptions
+from docling.datamodel.pipeline_options import LayoutOptions, VlmPipelineOptions
 from docling.datamodel.pipeline_options_vlm_model import (
     ApiVlmOptions,
     InferenceFramework,
@@ -115,38 +115,47 @@ class VlmPipeline(PaginatedPipeline):
                 TwoStageVlmOptions, self.pipeline_options.vlm_options
             )
 
-            layout_options = twostagevlm_options.layout_options
-            vlm_options = twostagevlm_options.vlm_options
+            stage_1_options = twostagevlm_options.layout_options
+            stage_2_options = twostagevlm_options.vlm_options
 
             layout_model = LayoutModel(
                 artifacts_path=artifacts_path,
                 accelerator_options=pipeline_options.accelerator_options,
-                options=layout_options,
+                options=LayoutOptions(
+                    create_orphan_clusters=False, model_spec=stage_1_options
+                ),
             )
 
-            if vlm_options.inference_framework == InferenceFramework.MLX:
+            if (
+                isinstance(stage_2_options, InlineVlmOptions)
+                and stage_2_options.inference_framework == InferenceFramework.MLX
+            ):
                 vlm_model_mlx = HuggingFaceMlxModel(
                     enabled=True,  # must be always enabled for this pipeline to make sense.
                     artifacts_path=artifacts_path,
                     accelerator_options=pipeline_options.accelerator_options,
-                    vlm_options=vlm_options,
+                    vlm_options=stage_2_options,
                 )
                 self.build_pipe = [
                     TwoStageVlmModel(layout_model=layout_model, vlm_model=vlm_model_mlx)
                 ]
-            elif vlm_options.inference_framework == InferenceFramework.TRANSFORMERS:
+            elif (
+                isinstance(stage_2_options, InlineVlmOptions)
+                and stage_2_options.inference_framework
+                == InferenceFramework.TRANSFORMERS
+            ):
                 vlm_model_hf = HuggingFaceTransformersVlmModel(
                     enabled=True,  # must be always enabled for this pipeline to make sense.
                     artifacts_path=artifacts_path,
                     accelerator_options=pipeline_options.accelerator_options,
-                    vlm_options=vlm_options,
+                    vlm_options=stage_2_options,
                 )
                 self.build_pipe = [
                     TwoStageVlmModel(layout_model=layout_model, vlm_model=vlm_model_hf)
                 ]
             else:
                 raise ValueError(
-                    f"Could not instantiate the right type of VLM pipeline: {vlm_options.inference_framework}"
+                    f"Could not instantiate the right type of VLM pipeline: {stage_2_options}"
                 )
 
         self.enrichment_pipe = [
