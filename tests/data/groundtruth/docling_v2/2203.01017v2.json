@@ -39,22 +39,22 @@
         "$ref": "#/texts/6"
       },
       {
-        "$ref": "#/pictures/0"
+        "$ref": "#/texts/7"
       },
       {
-        "$ref": "#/texts/59"
-      },
-      {
-        "$ref": "#/texts/60"
+        "$ref": "#/texts/8"
       },
       {
         "$ref": "#/tables/0"
       },
       {
-        "$ref": "#/texts/61"
+        "$ref": "#/texts/9"
       },
       {
         "$ref": "#/tables/1"
+      },
+      {
+        "$ref": "#/pictures/0"
       },
       {
         "$ref": "#/texts/63"
@@ -495,7 +495,7 @@
       },
       "children": [
         {
-          "$ref": "#/texts/7"
+          "$ref": "#/texts/11"
         }
       ],
       "content_layer": "body",
@@ -509,7 +509,7 @@
       },
       "children": [
         {
-          "$ref": "#/texts/8"
+          "$ref": "#/texts/12"
         }
       ],
       "content_layer": "body",
@@ -1027,6 +1027,115 @@
     {
       "self_ref": "#/texts/7",
       "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "section_header",
+      "prov": [
+        {
+          "page_no": 1,
+          "bbox": {
+            "l": 50.11,
+            "t": 252.06,
+            "r": 126.95,
+            "b": 241.31,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            15
+          ]
+        }
+      ],
+      "orig": "1. Introduction",
+      "text": "1. Introduction",
+      "level": 1
+    },
+    {
+      "self_ref": "#/texts/8",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "text",
+      "prov": [
+        {
+          "page_no": 1,
+          "bbox": {
+            "l": 50.11,
+            "t": 230.95,
+            "r": 286.37,
+            "b": 78.93,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            712
+          ]
+        }
+      ],
+      "orig": "The occurrence of tables in documents is ubiquitous. They often summarise quantitative or factual data, which is cumbersome to describe in verbose text but nevertheless extremely valuable. Unfortunately, this compact representation is often not easy to parse by machines. There are many implicit conventions used to obtain a compact table representation. For example, tables often have complex columnand row-headers in order to reduce duplicated cell content. Lines of different shapes and sizes are leveraged to separate content or indicate a tree structure. Additionally, tables can also have empty/missing table-entries or multi-row textual table-entries. Fig. 1 shows a table which presents all these issues.",
+      "text": "The occurrence of tables in documents is ubiquitous. They often summarise quantitative or factual data, which is cumbersome to describe in verbose text but nevertheless extremely valuable. Unfortunately, this compact representation is often not easy to parse by machines. There are many implicit conventions used to obtain a compact table representation. For example, tables often have complex columnand row-headers in order to reduce duplicated cell content. Lines of different shapes and sizes are leveraged to separate content or indicate a tree structure. Additionally, tables can also have empty/missing table-entries or multi-row textual table-entries. Fig. 1 shows a table which presents all these issues."
+    },
+    {
+      "self_ref": "#/texts/9",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "text",
+      "prov": [
+        {
+          "page_no": 1,
+          "bbox": {
+            "l": 535.14,
+            "t": 437.89,
+            "r": 539.53,
+            "b": 430.13,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            1
+          ]
+        }
+      ],
+      "orig": "7",
+      "text": "7"
+    },
+    {
+      "self_ref": "#/texts/10",
+      "parent": {
+        "$ref": "#/pictures/0"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "caption",
+      "prov": [
+        {
+          "page_no": 1,
+          "bbox": {
+            "l": 308.86,
+            "t": 277.23,
+            "r": 545.12,
+            "b": 232.81,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            220
+          ]
+        }
+      ],
+      "orig": "Figure 1: Picture of a table with subtle, complex features such as (1) multi-column headers, (2) cell with multi-row text and (3) cells with no content. Image from PubTabNet evaluation set, filename: 'PMC2944238 004 02'.",
+      "text": "Figure 1: Picture of a table with subtle, complex features such as (1) multi-column headers, (2) cell with multi-row text and (3) cells with no content. Image from PubTabNet evaluation set, filename: 'PMC2944238 004 02'."
+    },
+    {
+      "self_ref": "#/texts/11",
+      "parent": {
         "$ref": "#/groups/0"
       },
       "children": [],
@@ -1054,7 +1163,7 @@
       "marker": "b."
     },
     {
-      "self_ref": "#/texts/8",
+      "self_ref": "#/texts/12",
       "parent": {
         "$ref": "#/groups/1"
       },
@@ -1083,7 +1192,7 @@
       "marker": "c."
     },
     {
-      "self_ref": "#/texts/9",
+      "self_ref": "#/texts/13",
       "parent": {
         "$ref": "#/pictures/0"
       },
@@ -1110,7 +1219,7 @@
       "text": "1"
     },
     {
-      "self_ref": "#/texts/10",
+      "self_ref": "#/texts/14",
       "parent": {
         "$ref": "#/pictures/0"
       },
@@ -1137,7 +1246,7 @@
       "text": "0"
     },
     {
-      "self_ref": "#/texts/11",
+      "self_ref": "#/texts/15",
       "parent": {
         "$ref": "#/pictures/0"
       },
@@ -1164,7 +1273,7 @@
       "text": "2"
     },
     {
-      "self_ref": "#/texts/12",
+      "self_ref": "#/texts/16",
       "parent": {
         "$ref": "#/pictures/0"
       },
@@ -1191,7 +1300,7 @@
       "text": "3"
     },
     {
-      "self_ref": "#/texts/13",
+      "self_ref": "#/texts/17",
       "parent": {
         "$ref": "#/pictures/0"
       },
@@ -1218,7 +1327,7 @@
       "text": "4"
     },
     {
-      "self_ref": "#/texts/14",
+      "self_ref": "#/texts/18",
       "parent": {
         "$ref": "#/pictures/0"
       },
@@ -1245,7 +1354,7 @@
       "text": "5"
     },
     {
-      "self_ref": "#/texts/15",
+      "self_ref": "#/texts/19",
       "parent": {
         "$ref": "#/pictures/0"
       },
@@ -1272,7 +1381,7 @@
       "text": "6"
     },
     {
-      "self_ref": "#/texts/16",
+      "self_ref": "#/texts/20",
       "parent": {
         "$ref": "#/pictures/0"
       },
@@ -1299,7 +1408,7 @@
       "text": "8"
     },
     {
-      "self_ref": "#/texts/17",
+      "self_ref": "#/texts/21",
       "parent": {
         "$ref": "#/pictures/0"
       },
@@ -1326,7 +1435,7 @@
       "text": "9"
     },
     {
-      "self_ref": "#/texts/18",
+      "self_ref": "#/texts/22",
       "parent": {
         "$ref": "#/pictures/0"
       },
@@ -1353,7 +1462,7 @@
       "text": "10"
     },
     {
-      "self_ref": "#/texts/19",
+      "self_ref": "#/texts/23",
       "parent": {
         "$ref": "#/pictures/0"
       },
@@ -1380,7 +1489,7 @@
       "text": "11"
     },
     {
-      "self_ref": "#/texts/20",
+      "self_ref": "#/texts/24",
       "parent": {
         "$ref": "#/pictures/0"
       },
@@ -1407,7 +1516,7 @@
       "text": "12"
     },
     {
-      "self_ref": "#/texts/21",
+      "self_ref": "#/texts/25",
       "parent": {
         "$ref": "#/pictures/0"
       },
@@ -1434,7 +1543,7 @@
       "text": "13"
     },
     {
-      "self_ref": "#/texts/22",
+      "self_ref": "#/texts/26",
       "parent": {
         "$ref": "#/pictures/0"
       },
@@ -1461,7 +1570,7 @@
       "text": "14"
     },
     {
-      "self_ref": "#/texts/23",
+      "self_ref": "#/texts/27",
       "parent": {
         "$ref": "#/pictures/0"
       },
@@ -1488,7 +1597,7 @@
       "text": "15"
     },
     {
-      "self_ref": "#/texts/24",
+      "self_ref": "#/texts/28",
       "parent": {
         "$ref": "#/pictures/0"
       },
@@ -1515,7 +1624,7 @@
       "text": "16"
     },
     {
-      "self_ref": "#/texts/25",
+      "self_ref": "#/texts/29",
       "parent": {
         "$ref": "#/pictures/0"
       },
@@ -1542,7 +1651,7 @@
       "text": "17"
     },
     {
-      "self_ref": "#/texts/26",
+      "self_ref": "#/texts/30",
       "parent": {
         "$ref": "#/pictures/0"
       },
@@ -1569,7 +1678,7 @@
       "text": "18"
     },
     {
-      "self_ref": "#/texts/27",
+      "self_ref": "#/texts/31",
       "parent": {
         "$ref": "#/pictures/0"
       },
@@ -1596,7 +1705,7 @@
       "text": "19"
     },
     {
-      "self_ref": "#/texts/28",
+      "self_ref": "#/texts/32",
       "parent": {
         "$ref": "#/pictures/0"
       },
@@ -1623,7 +1732,7 @@
       "text": "20"
     },
     {
-      "self_ref": "#/texts/29",
+      "self_ref": "#/texts/33",
       "parent": {
         "$ref": "#/pictures/0"
       },
@@ -1650,7 +1759,7 @@
       "text": "1"
     },
     {
-      "self_ref": "#/texts/30",
+      "self_ref": "#/texts/34",
       "parent": {
         "$ref": "#/pictures/0"
       },
@@ -1677,7 +1786,7 @@
       "text": "0"
     },
     {
-      "self_ref": "#/texts/31",
+      "self_ref": "#/texts/35",
       "parent": {
         "$ref": "#/pictures/0"
       },
@@ -1704,7 +1813,7 @@
       "text": "2"
     },
     {
-      "self_ref": "#/texts/32",
+      "self_ref": "#/texts/36",
       "parent": {
         "$ref": "#/pictures/0"
       },
@@ -1731,7 +1840,7 @@
       "text": "3"
     },
     {
-      "self_ref": "#/texts/33",
+      "self_ref": "#/texts/37",
       "parent": {
         "$ref": "#/pictures/0"
       },
@@ -1758,7 +1867,7 @@
       "text": "4"
     },
     {
-      "self_ref": "#/texts/34",
+      "self_ref": "#/texts/38",
       "parent": {
         "$ref": "#/pictures/0"
       },
@@ -1785,7 +1894,7 @@
       "text": "5"
     },
     {
-      "self_ref": "#/texts/35",
+      "self_ref": "#/texts/39",
       "parent": {
         "$ref": "#/pictures/0"
       },
@@ -1812,7 +1921,7 @@
       "text": "6"
     },
     {
-      "self_ref": "#/texts/36",
+      "self_ref": "#/texts/40",
       "parent": {
         "$ref": "#/pictures/0"
       },
@@ -1839,7 +1948,7 @@
       "text": "7"
     },
     {
-      "self_ref": "#/texts/37",
+      "self_ref": "#/texts/41",
       "parent": {
         "$ref": "#/pictures/0"
       },
@@ -1866,7 +1975,7 @@
       "text": "8"
     },
     {
-      "self_ref": "#/texts/38",
+      "self_ref": "#/texts/42",
       "parent": {
         "$ref": "#/pictures/0"
       },
@@ -1893,7 +2002,7 @@
       "text": "9"
     },
     {
-      "self_ref": "#/texts/39",
+      "self_ref": "#/texts/43",
       "parent": {
         "$ref": "#/pictures/0"
       },
@@ -1920,7 +2029,7 @@
       "text": "10"
     },
     {
-      "self_ref": "#/texts/40",
+      "self_ref": "#/texts/44",
       "parent": {
         "$ref": "#/pictures/0"
       },
@@ -1947,7 +2056,7 @@
       "text": "11"
     },
     {
-      "self_ref": "#/texts/41",
+      "self_ref": "#/texts/45",
       "parent": {
         "$ref": "#/pictures/0"
       },
@@ -1974,7 +2083,7 @@
       "text": "12"
     },
     {
-      "self_ref": "#/texts/42",
+      "self_ref": "#/texts/46",
       "parent": {
         "$ref": "#/pictures/0"
       },
@@ -2001,7 +2110,7 @@
       "text": "13"
     },
     {
-      "self_ref": "#/texts/43",
+      "self_ref": "#/texts/47",
       "parent": {
         "$ref": "#/pictures/0"
       },
@@ -2028,7 +2137,7 @@
       "text": "14"
     },
     {
-      "self_ref": "#/texts/44",
+      "self_ref": "#/texts/48",
       "parent": {
         "$ref": "#/pictures/0"
       },
@@ -2055,7 +2164,7 @@
       "text": "15"
     },
     {
-      "self_ref": "#/texts/45",
+      "self_ref": "#/texts/49",
       "parent": {
         "$ref": "#/pictures/0"
       },
@@ -2082,7 +2191,7 @@
       "text": "16"
     },
     {
-      "self_ref": "#/texts/46",
+      "self_ref": "#/texts/50",
       "parent": {
         "$ref": "#/pictures/0"
       },
@@ -2109,7 +2218,7 @@
       "text": "17"
     },
     {
-      "self_ref": "#/texts/47",
+      "self_ref": "#/texts/51",
       "parent": {
         "$ref": "#/pictures/0"
       },
@@ -2136,7 +2245,7 @@
       "text": "18"
     },
     {
-      "self_ref": "#/texts/48",
+      "self_ref": "#/texts/52",
       "parent": {
         "$ref": "#/pictures/0"
       },
@@ -2163,7 +2272,7 @@
       "text": "19"
     },
     {
-      "self_ref": "#/texts/49",
+      "self_ref": "#/texts/53",
       "parent": {
         "$ref": "#/pictures/0"
       },
@@ -2190,7 +2299,7 @@
       "text": "20"
     },
     {
-      "self_ref": "#/texts/50",
+      "self_ref": "#/texts/54",
       "parent": {
         "$ref": "#/pictures/0"
       },
@@ -2217,7 +2326,7 @@
       "text": "1"
     },
     {
-      "self_ref": "#/texts/51",
+      "self_ref": "#/texts/55",
       "parent": {
         "$ref": "#/pictures/0"
       },
@@ -2244,7 +2353,7 @@
       "text": "3"
     },
     {
-      "self_ref": "#/texts/52",
+      "self_ref": "#/texts/56",
       "parent": {
         "$ref": "#/pictures/0"
       },
@@ -2271,7 +2380,7 @@
       "text": "3"
     },
     {
-      "self_ref": "#/texts/53",
+      "self_ref": "#/texts/57",
       "parent": {
         "$ref": "#/pictures/0"
       },
@@ -2298,7 +2407,7 @@
       "text": "2"
     },
     {
-      "self_ref": "#/texts/54",
+      "self_ref": "#/texts/58",
       "parent": {
         "$ref": "#/pictures/0"
       },
@@ -2325,7 +2434,7 @@
       "text": "2"
     },
     {
-      "self_ref": "#/texts/55",
+      "self_ref": "#/texts/59",
       "parent": {
         "$ref": "#/pictures/0"
       },
@@ -2352,7 +2461,7 @@
       "text": "2"
     },
     {
-      "self_ref": "#/texts/56",
+      "self_ref": "#/texts/60",
       "parent": {
         "$ref": "#/pictures/0"
       },
@@ -2379,7 +2488,7 @@
       "text": "1"
     },
     {
-      "self_ref": "#/texts/57",
+      "self_ref": "#/texts/61",
       "parent": {
         "$ref": "#/pictures/0"
       },
@@ -2406,7 +2515,7 @@
       "text": "1"
     },
     {
-      "self_ref": "#/texts/58",
+      "self_ref": "#/texts/62",
       "parent": {
         "$ref": "#/pictures/0"
       },
@@ -2431,115 +2540,6 @@
       ],
       "orig": "3",
       "text": "3"
-    },
-    {
-      "self_ref": "#/texts/59",
-      "parent": {
-        "$ref": "#/body"
-      },
-      "children": [],
-      "content_layer": "body",
-      "label": "section_header",
-      "prov": [
-        {
-          "page_no": 1,
-          "bbox": {
-            "l": 50.11,
-            "t": 252.06,
-            "r": 126.95,
-            "b": 241.31,
-            "coord_origin": "BOTTOMLEFT"
-          },
-          "charspan": [
-            0,
-            15
-          ]
-        }
-      ],
-      "orig": "1. Introduction",
-      "text": "1. Introduction",
-      "level": 1
-    },
-    {
-      "self_ref": "#/texts/60",
-      "parent": {
-        "$ref": "#/body"
-      },
-      "children": [],
-      "content_layer": "body",
-      "label": "text",
-      "prov": [
-        {
-          "page_no": 1,
-          "bbox": {
-            "l": 50.11,
-            "t": 230.95,
-            "r": 286.37,
-            "b": 78.93,
-            "coord_origin": "BOTTOMLEFT"
-          },
-          "charspan": [
-            0,
-            712
-          ]
-        }
-      ],
-      "orig": "The occurrence of tables in documents is ubiquitous. They often summarise quantitative or factual data, which is cumbersome to describe in verbose text but nevertheless extremely valuable. Unfortunately, this compact representation is often not easy to parse by machines. There are many implicit conventions used to obtain a compact table representation. For example, tables often have complex columnand row-headers in order to reduce duplicated cell content. Lines of different shapes and sizes are leveraged to separate content or indicate a tree structure. Additionally, tables can also have empty/missing table-entries or multi-row textual table-entries. Fig. 1 shows a table which presents all these issues.",
-      "text": "The occurrence of tables in documents is ubiquitous. They often summarise quantitative or factual data, which is cumbersome to describe in verbose text but nevertheless extremely valuable. Unfortunately, this compact representation is often not easy to parse by machines. There are many implicit conventions used to obtain a compact table representation. For example, tables often have complex columnand row-headers in order to reduce duplicated cell content. Lines of different shapes and sizes are leveraged to separate content or indicate a tree structure. Additionally, tables can also have empty/missing table-entries or multi-row textual table-entries. Fig. 1 shows a table which presents all these issues."
-    },
-    {
-      "self_ref": "#/texts/61",
-      "parent": {
-        "$ref": "#/body"
-      },
-      "children": [],
-      "content_layer": "body",
-      "label": "text",
-      "prov": [
-        {
-          "page_no": 1,
-          "bbox": {
-            "l": 535.14,
-            "t": 437.89,
-            "r": 539.53,
-            "b": 430.13,
-            "coord_origin": "BOTTOMLEFT"
-          },
-          "charspan": [
-            0,
-            1
-          ]
-        }
-      ],
-      "orig": "7",
-      "text": "7"
-    },
-    {
-      "self_ref": "#/texts/62",
-      "parent": {
-        "$ref": "#/tables/1"
-      },
-      "children": [],
-      "content_layer": "body",
-      "label": "caption",
-      "prov": [
-        {
-          "page_no": 1,
-          "bbox": {
-            "l": 308.86,
-            "t": 277.23,
-            "r": 545.12,
-            "b": 232.81,
-            "coord_origin": "BOTTOMLEFT"
-          },
-          "charspan": [
-            0,
-            220
-          ]
-        }
-      ],
-      "orig": "Figure 1: Picture of a table with subtle, complex features such as (1) multi-column headers, (2) cell with multi-row text and (3) cells with no content. Image from PubTabNet evaluation set, filename: 'PMC2944238 004 02'.",
-      "text": "Figure 1: Picture of a table with subtle, complex features such as (1) multi-column headers, (2) cell with multi-row text and (3) cells with no content. Image from PubTabNet evaluation set, filename: 'PMC2944238 004 02'."
     },
     {
       "self_ref": "#/texts/63",
@@ -17245,22 +17245,13 @@
       },
       "children": [
         {
+          "$ref": "#/texts/10"
+        },
+        {
           "$ref": "#/groups/0"
         },
         {
           "$ref": "#/groups/1"
-        },
-        {
-          "$ref": "#/texts/9"
-        },
-        {
-          "$ref": "#/texts/10"
-        },
-        {
-          "$ref": "#/texts/11"
-        },
-        {
-          "$ref": "#/texts/12"
         },
         {
           "$ref": "#/texts/13"
@@ -17399,6 +17390,18 @@
         },
         {
           "$ref": "#/texts/58"
+        },
+        {
+          "$ref": "#/texts/59"
+        },
+        {
+          "$ref": "#/texts/60"
+        },
+        {
+          "$ref": "#/texts/61"
+        },
+        {
+          "$ref": "#/texts/62"
         }
       ],
       "content_layer": "body",
@@ -17407,10 +17410,10 @@
         {
           "page_no": 1,
           "bbox": {
-            "l": 314.78,
-            "t": 566.1,
-            "r": 537.93,
-            "b": 295.61,
+            "l": 314.8,
+            "t": 564.63,
+            "r": 537.85,
+            "b": 295.65,
             "coord_origin": "BOTTOMLEFT"
           },
           "charspan": [
@@ -17419,7 +17422,11 @@
           ]
         }
       ],
-      "captions": [],
+      "captions": [
+        {
+          "$ref": "#/texts/10"
+        }
+      ],
       "references": [],
       "footnotes": [],
       "annotations": []
@@ -18959,10 +18966,10 @@
         {
           "page_no": 1,
           "bbox": {
-            "l": 315.46,
-            "t": 561.45,
-            "r": 537.05,
-            "b": 489.47,
+            "l": 315.45,
+            "t": 561.4,
+            "r": 537.03,
+            "b": 489.52,
             "coord_origin": "BOTTOMLEFT"
           },
           "charspan": [
@@ -19029,21 +19036,17 @@
       "parent": {
         "$ref": "#/body"
       },
-      "children": [
-        {
-          "$ref": "#/texts/62"
-        }
-      ],
+      "children": [],
       "content_layer": "body",
       "label": "table",
       "prov": [
         {
           "page_no": 1,
           "bbox": {
-            "l": 315.2,
+            "l": 315.23,
             "t": 358.2,
-            "r": 537.1,
-            "b": 295.44,
+            "r": 537.08,
+            "b": 295.47,
             "coord_origin": "BOTTOMLEFT"
           },
           "charspan": [
@@ -19052,11 +19055,7 @@
           ]
         }
       ],
-      "captions": [
-        {
-          "$ref": "#/texts/62"
-        }
-      ],
+      "captions": [],
       "references": [],
       "footnotes": [],
       "data": {
