@@ -1,6 +1,7 @@
 import csv
 import logging
 import re
+import tarfile
 from collections.abc import Iterable
 from enum import Enum
 from io import BytesIO
@@ -314,21 +315,25 @@ class _DocumentConversionInput(BaseModel):
                 elif objname.endswith(".pptx"):
                     mime = "application/vnd.openxmlformats-officedocument.presentationml.presentation"
 
+        if mime is not None and mime.lower() == "application/gzip":
+            if detected_mime := _DocumentConversionInput._detect_mets_gbs(obj):
+                mime = detected_mime
+
         mime = mime or _DocumentConversionInput._detect_html_xhtml(content)
         mime = mime or _DocumentConversionInput._detect_csv(content)
         mime = mime or "text/plain"
         formats = MimeTypeToFormat.get(mime, [])
         _log.info(f"detected formats: {formats}")
 
-        if formats:
-            if len(formats) == 1 and mime not in ("text/plain"):
-                return formats[0]
-            else:  # ambiguity in formats
-                return _DocumentConversionInput._guess_from_content(
-                    content, mime, formats
-                )
-        else:
-            return None
+        input_format: Optional[InputFormat] = None
+        if len(formats) == 1:
+            input_format = formats[0]
+
+        if content:
+            input_format = _DocumentConversionInput._guess_from_content(
+                content, mime, formats
+            )
+        return input_format
 
     @staticmethod
     def _guess_from_content(
@@ -336,6 +341,9 @@ class _DocumentConversionInput(BaseModel):
     ) -> Optional[InputFormat]:
         """Guess the input format of a document by checking part of its content."""
         input_format: Optional[InputFormat] = None
+
+        if len(formats) == 1:
+            input_format = formats[0]
 
         if mime == "application/xml":
             content_str = content.decode("utf-8")
@@ -456,4 +464,25 @@ class _DocumentConversionInput(BaseModel):
         except csv.Error:
             return None
 
+        return None
+
+    @staticmethod
+    def _detect_mets_gbs(
+        obj: Union[Path, DocumentStream],
+    ) -> Optional[Literal["application/mets+xml"]]:
+        content = obj if isinstance(obj, Path) else obj.stream
+        tar: tarfile.TarFile
+        member: tarfile.TarInfo
+        with tarfile.open(
+            name=content if isinstance(content, Path) else None,
+            fileobj=content if isinstance(content, BytesIO) else None,
+            mode="r:gz",
+        ) as tar:
+            for member in tar.getmembers():
+                if member.name.endswith(".xml"):
+                    file = tar.extractfile(member)
+                    if file is not None:
+                        content_str = file.read().decode()
+                        if "http://www.loc.gov/METS/" in content_str:
+                            return "application/mets+xml"
         return None
