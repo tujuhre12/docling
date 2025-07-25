@@ -133,9 +133,11 @@ class MetsGbsPageBackend(PdfPageBackend):
             width=self._dpage.dimension.width, height=self._dpage.dimension.height
         )
 
-    def unload(self):
-        self._ppage = None
-        self._dpage = None
+    def unload(self) -> None:
+        if hasattr(self, "_im"):
+            delattr(self, "_im")
+        if hasattr(self, "_dpage"):
+            delattr(self, "_dpage")
 
 
 class _UseType(str, Enum):
@@ -392,6 +394,6 @@ class MetsGbsDocumentBackend(PaginatedDocumentBackend):
     def supports_pagination(cls) -> bool:
         return True
 
-    def unload(self):
+    def unload(self) -> None:
         super().unload()
         self._tar.close()
