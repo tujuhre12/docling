@@ -325,15 +325,15 @@ class _DocumentConversionInput(BaseModel):
         formats = MimeTypeToFormat.get(mime, [])
         _log.info(f"detected formats: {formats}")
 
-        input_format: Optional[InputFormat] = None
-        if len(formats) == 1:
-            input_format = formats[0]
-
-        if content:
-            input_format = _DocumentConversionInput._guess_from_content(
-                content, mime, formats
-            )
-        return input_format
+        if formats:
+            if len(formats) == 1 and mime not in ("text/plain"):
+                return formats[0]
+            else:  # ambiguity in formats
+                return _DocumentConversionInput._guess_from_content(
+                    content, mime, formats
+                )
+        else:
+            return None
 
     @staticmethod
     def _guess_from_content(
@@ -341,9 +341,6 @@ class _DocumentConversionInput(BaseModel):
     ) -> Optional[InputFormat]:
         """Guess the input format of a document by checking part of its content."""
         input_format: Optional[InputFormat] = None
-
-        if len(formats) == 1:
-            input_format = formats[0]
 
         if mime == "application/xml":
             content_str = content.decode("utf-8")
