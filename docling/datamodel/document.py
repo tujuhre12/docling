@@ -482,7 +482,7 @@ class _DocumentConversionInput(BaseModel):
                 if member.name.endswith(".xml"):
                     file = tar.extractfile(member)
                     if file is not None:
-                        content_str = file.read().decode()
+                        content_str = file.read().decode(errors="ignore")
                         if "http://www.loc.gov/METS/" in content_str:
                             return "application/mets+xml"
         return None

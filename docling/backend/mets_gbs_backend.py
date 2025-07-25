@@ -305,13 +305,13 @@ class MetsGbsDocumentBackend(PaginatedDocumentBackend):
         ocr_file = self._tar.extractfile(ocr_info.path)
         assert ocr_file is not None
         ocr_content = ocr_file.read()
-        ocr_root: etree._Element = etree.fromstring(ocr_content)
+        parser = etree.HTMLParser()
+        ocr_root: etree._Element = etree.fromstring(ocr_content, parser=parser)
 
         line_cells: List[TextCell] = []
         word_cells: List[TextCell] = []
 
-        ns = {"x": "http://www.w3.org/1999/xhtml"}
-        page_div = ocr_root.xpath("//x:div[@class='ocr_page']", namespaces=ns)
+        page_div = ocr_root.xpath("//div[@class='ocr_page']")
 
         size = Size(width=im.size[0], height=im.size[1])
         if page_div:
@@ -326,9 +326,7 @@ class MetsGbsDocumentBackend(PaginatedDocumentBackend):
         im = im.convert("RGB")
 
         # Extract all ocrx_word spans
-        for ix, word in enumerate(
-            ocr_root.xpath("//x:span[@class='ocrx_word']", namespaces=ns)
-        ):
+        for ix, word in enumerate(ocr_root.xpath("//span[@class='ocrx_word']")):
             text = "".join(word.itertext()).strip()
             title = word.attrib.get("title", "")
             rect = _extract_rect(title)
@@ -347,9 +345,7 @@ class MetsGbsDocumentBackend(PaginatedDocumentBackend):
 
         # Extract all ocr_line spans
         # line: etree._Element
-        for ix, line in enumerate(
-            ocr_root.xpath("//x:span[@class='ocr_line']", namespaces=ns)
-        ):
+        for ix, line in enumerate(ocr_root.xpath("//span[@class='ocr_line']")):
             text = "".join(line.itertext()).strip()
             title = line.attrib.get("title", "")
             rect = _extract_rect(title)

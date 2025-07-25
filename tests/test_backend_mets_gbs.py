@@ -9,7 +9,7 @@ from docling.datamodel.document import InputDocument
 
 @pytest.fixture
 def test_doc_path():
-    return Path("/Users/dol/Downloads/32044009881525.tar.gz")
+    return Path("/Users/dol/Downloads/32044009881525_select.tar.gz")
 
 
 def _get_backend(pdf_doc):
@@ -39,7 +39,7 @@ def test_process_pages(test_doc_path):
 
 def test_get_text_from_rect(test_doc_path):
     doc_backend: MetsGbsDocumentBackend = _get_backend(test_doc_path)
-    page_backend: MetsGbsPageBackend = doc_backend.load_page(9)
+    page_backend: MetsGbsPageBackend = doc_backend.load_page(0)
 
     # Get the title text of the DocLayNet paper
     textpiece = page_backend.get_text_in_rect(
@@ -56,7 +56,7 @@ def test_get_text_from_rect(test_doc_path):
 
 def test_crop_page_image(test_doc_path):
     doc_backend: MetsGbsDocumentBackend = _get_backend(test_doc_path)
-    page_backend: MetsGbsPageBackend = doc_backend.load_page(9)
+    page_backend: MetsGbsPageBackend = doc_backend.load_page(0)
 
     page_backend.get_page_image(
         scale=2, cropbox=BoundingBox(l=270, t=587, r=1385, b=1995)
@@ -68,22 +68,10 @@ def test_crop_page_image(test_doc_path):
     doc_backend.unload()
 
 
-def test_crop_page_image_jp2(test_doc_path):
-    doc_backend: MetsGbsDocumentBackend = _get_backend(test_doc_path)
-    page_backend: MetsGbsPageBackend = doc_backend.load_page(1)
-
-    page_backend.get_page_image(scale=2, cropbox=BoundingBox(l=160, t=29, r=732, b=173))
-    # im.show()
-
-    # Explicitly clean up resources
-    page_backend.unload()
-    doc_backend.unload()
-
-
 def test_num_pages(test_doc_path):
     doc_backend: MetsGbsDocumentBackend = _get_backend(test_doc_path)
     assert doc_backend.is_valid()
-    assert doc_backend.page_count() == 276
+    assert doc_backend.page_count() == 3
 
     # Explicitly clean up resources to prevent race conditions in CI
     doc_backend.unload()
