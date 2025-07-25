@@ -326,7 +326,9 @@ class MetsGbsDocumentBackend(PaginatedDocumentBackend):
         im = im.convert("RGB")
 
         # Extract all ocrx_word spans
-        for word in ocr_root.xpath("//x:span[@class='ocrx_word']", namespaces=ns):
+        for ix, word in enumerate(
+            ocr_root.xpath("//x:span[@class='ocrx_word']", namespaces=ns)
+        ):
             text = "".join(word.itertext()).strip()
             title = word.attrib.get("title", "")
             rect = _extract_rect(title)
@@ -334,13 +336,20 @@ class MetsGbsDocumentBackend(PaginatedDocumentBackend):
             if rect:
                 word_cells.append(
                     TextCell(
-                        text=text, orig=text, rect=rect, from_ocr=True, confidence=conf
+                        index=ix,
+                        text=text,
+                        orig=text,
+                        rect=rect,
+                        from_ocr=True,
+                        confidence=conf,
                     )
                 )
 
         # Extract all ocr_line spans
         # line: etree._Element
-        for line in ocr_root.xpath("//x:span[@class='ocr_line']", namespaces=ns):
+        for ix, line in enumerate(
+            ocr_root.xpath("//x:span[@class='ocr_line']", namespaces=ns)
+        ):
             text = "".join(line.itertext()).strip()
             title = line.attrib.get("title", "")
             rect = _extract_rect(title)
@@ -348,7 +357,12 @@ class MetsGbsDocumentBackend(PaginatedDocumentBackend):
             if rect:
                 line_cells.append(
                     TextCell(
-                        text=text, orig=text, rect=rect, from_ocr=True, confidence=conf
+                        index=ix,
+                        text=text,
+                        orig=text,
+                        rect=rect,
+                        from_ocr=True,
+                        confidence=conf,
                     )
                 )
 
