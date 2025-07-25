@@ -22,7 +22,7 @@ from PIL import Image
 from PIL.Image import Image as PILImage
 
 from docling.backend.abstract_backend import PaginatedDocumentBackend
-from docling.backend.pdf_backend import PdfPageBackend
+from docling.backend.pdf_backend import PdfDocumentBackend, PdfPageBackend
 from docling.datamodel.base_models import InputFormat
 
 if TYPE_CHECKING:
@@ -194,7 +194,7 @@ def _extract_confidence(title_str) -> float:
     return 1
 
 
-class MetsGbsDocumentBackend(PaginatedDocumentBackend):
+class MetsGbsDocumentBackend(PdfDocumentBackend):
     def __init__(self, in_doc: "InputDocument", path_or_stream: Union[BytesIO, Path]):
         super().__init__(in_doc, path_or_stream)
 
