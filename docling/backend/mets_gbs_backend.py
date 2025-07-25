@@ -388,7 +388,7 @@ class MetsGbsDocumentBackend(PaginatedDocumentBackend):
 
     @classmethod
     def supported_formats(cls) -> Set[InputFormat]:
-        return {InputFormat.XML_METS_GBS}
+        return {InputFormat.METS_GBS}
 
     @classmethod
     def supports_pagination(cls) -> bool:

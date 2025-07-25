@@ -56,7 +56,7 @@ class InputFormat(str, Enum):
     XLSX = "xlsx"
     XML_USPTO = "xml_uspto"
     XML_JATS = "xml_jats"
-    XML_METS_GBS = "xml_mets_gbs"
+    METS_GBS = "xml_mets_gbs"
     JSON_DOCLING = "json_docling"
     AUDIO = "audio"
 
@@ -82,7 +82,7 @@ FormatToExtensions: Dict[InputFormat, List[str]] = {
     InputFormat.CSV: ["csv"],
     InputFormat.XLSX: ["xlsx", "xlsm"],
     InputFormat.XML_USPTO: ["xml", "txt"],
-    InputFormat.XML_METS_GBS: ["tar.gz"],
+    InputFormat.METS_GBS: ["tar.gz"],
     InputFormat.JSON_DOCLING: ["json"],
     InputFormat.AUDIO: ["wav", "mp3"],
 }
@@ -115,7 +115,7 @@ FormatToMimeType: Dict[InputFormat, List[str]] = {
         "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
     ],
     InputFormat.XML_USPTO: ["application/xml", "text/plain"],
-    InputFormat.XML_METS_GBS: ["application/mets+xml"],
+    InputFormat.METS_GBS: ["application/mets+xml"],
     InputFormat.JSON_DOCLING: ["application/json"],
     InputFormat.AUDIO: ["audio/x-wav", "audio/mpeg", "audio/wav", "audio/mp3"],
 }

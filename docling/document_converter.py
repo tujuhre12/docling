@@ -157,7 +157,7 @@ def _get_default_option(format: InputFormat) -> FormatOption:
         InputFormat.XML_JATS: FormatOption(
             pipeline_cls=SimplePipeline, backend=JatsDocumentBackend
         ),
-        InputFormat.XML_METS_GBS: FormatOption(
+        InputFormat.METS_GBS: FormatOption(
             pipeline_cls=StandardPdfPipeline, backend=MetsGbsDocumentBackend
         ),
         InputFormat.IMAGE: FormatOption(

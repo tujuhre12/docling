@@ -613,7 +613,7 @@ def convert(  # noqa: C901
             format_options = {
                 InputFormat.PDF: pdf_format_option,
                 InputFormat.IMAGE: pdf_format_option,
-                InputFormat.XML_METS_GBS: mets_gbs_format_option,
+                InputFormat.METS_GBS: mets_gbs_format_option,
             }
 
         elif pipeline == ProcessingPipeline.VLM:
